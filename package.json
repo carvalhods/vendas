@@ -1,0 +1,26 @@
+{
+  "name": "vendas",
+  "version": "0.0.1",
+  "description": "Controle de Vendas Simples",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhods/vendas.git"
+  },
+  "author": "David Carvalho",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/carvalhods/vendas/issues"
+  },
+  "homepage": "https://github.com/carvalhods/vendas#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-load": "^1.1.15",
+    "method-override": "^2.3.6"
+  }
+}
