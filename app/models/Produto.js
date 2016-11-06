@@ -45,6 +45,26 @@ module.exports = function(app){
         }
     });
 
+    Schema.pre('remove', function(next) {
+        var Venda = app.models.Venda;
+        var produto = this;
+        Venda.findOne({itens: {$elemMatch: {produto: produto._id}}})
+        .exec()
+        .then(
+            function(venda){
+                if (venda) {
+                    return next(new Error('Há lançamentos de vendas deste produto, não é possível excluí-lo'));
+                } else {
+                    next();
+                }
+            },
+            function(err){
+                return next(new Error('Não foi possível verificar lançamentos de vendas deste produto'));
+            }
+        )
+    })
+
+    /*
     Schema.methods.checaVendas = function(idProduto, cb) {
         var Venda = app.models.Venda;
         Venda.findOne({itens: {$elemMatch: {produto: mongoose.Types.ObjectId(idProduto)}}})
@@ -62,6 +82,7 @@ module.exports = function(app){
             }
         )
     };
+    */
 
     autoIncrement.initialize(mongoose.connection);
     Schema.plugin(autoIncrement.plugin, {
