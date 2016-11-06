@@ -1,15 +1,19 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
-module.exports = function(){
+module.exports = function(app){
     var Schema = mongoose.Schema({
         codigo: {
             type: Number,
             required: true,
+            uppercase: true,
+            trim: true,
             index: { unique: true }
         },
         descricao: {
             type: String,
+            uppercase: true,
+            trim: true,
             match: [/^[\wÀ-Úà-ú]+/, "A descrição do produto deve conter apenas letras no início"],
             minlength: [2, 'A descrição do produto precisa conter no mínimo {MINLENGTH} caracteres'],
             maxlength: [70, 'A descrição do produto deve conter no máximo {MAXLENGTH} caracteres']
@@ -19,7 +23,7 @@ module.exports = function(){
             required: [true, "É necessário preencher o campo {PATH}"],
             enum: {
                 values: ['UN', 'PÇ', 'CX', 'KG', 'M', 'M²', 'M³', 'L'],
-                message: "O campo 'unidade' não foi preenchido corretamente"
+                message: "O campo '{PATH}' não foi preenchido corretamente"
             }
         },
         qtde: {
@@ -41,8 +45,25 @@ module.exports = function(){
         }
     });
 
+    Schema.methods.checaVendas = function(idProduto, cb) {
+        var Venda = app.models.Venda;
+        Venda.findOne({itens: {$elemMatch: {produto: mongoose.Types.ObjectId(idProduto)}}})
+        .exec()
+        .then(
+            function(venda){
+                if (venda) {
+                    return cb(new Error('Há lançamentos de vendas deste produto, não é possível excluí-lo'), true);
+                } else {
+                    cb(null, false);
+                }
+            },
+            function(err){
+                return cb(new Error('Não foi possível verificar lançamentos de vendas deste produto'), true);
+            }
+        )
+    };
+
     autoIncrement.initialize(mongoose.connection);
-    
     Schema.plugin(autoIncrement.plugin, {
         model: 'Produto',
         field: 'codigo',

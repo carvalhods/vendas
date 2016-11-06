@@ -3,5 +3,10 @@ module.exports = function(app) {
 
     app.route('/produtos')
         .get(controller.listaProdutos)
-        .post(controller.insertProduto);
+        .post(controller.insertProduto)
+        .put(controller.updateProduto);
+
+    app.route('/produtos/:id')
+        .get(controller.getProduto)
+        .delete(controller.deleteProduto);
 }
