@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var settings = require('./settings');
 
 module.exports = function(){
-	var app = express();	
+	var app = express();
 	app.set('port', settings.port);
 	app.use(express.static('./public'));
 	app.set('view engine', 'ejs');
@@ -21,4 +21,3 @@ module.exports = function(){
 
 	return app;
 }
-
