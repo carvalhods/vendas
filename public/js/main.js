@@ -1,1 +1,1 @@
-angular.module('vendas', ['ngRoute','ngResource'])
+angular.module('vendas', ['ngRoute','ngResource']);

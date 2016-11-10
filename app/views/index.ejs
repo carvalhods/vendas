@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="vendor/semantic/dist/semantic.min.css" />
+	<link rel="stylesheet" href="css/styles.css" />
 	<script src="vendor/jquery/dist/jquery.min.js"></script>
 	<script src="vendor/semantic/dist/semantic.min.js"></script>
 	<script src="vendor/angular/angular.min.js"></script>
@@ -10,7 +11,27 @@
 	<script src="vendor/angular-resource/angular-resource.min.js"></script>
 	<script src="js/main.js"></script>
 </head>
-<body>
-<div>Teste</div>
+
+<body>	
+	<div class="ui visible inverted left vertical sidebar menu">
+		<a class="item" href="#">Cadastro de Produtos</a>		
+		<a class="item" href="#">Lançamento de Venda</a>
+		<a class="item" href="#">Histórico de Vendas</a>		
+	</div>
+
+	<div class="pusher">
+		<div class="ui basic segment">
+			<div ng-view>Vendas</div>
+		</div>
+	</div>
+
+	<script>
+	$(".item").click(function(){
+		$(".menu a").removeClass("active teal");
+		$(this).addClass("active teal");
+	});
+	</script>
+
 </body>
+
 </html>
