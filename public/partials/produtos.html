@@ -16,7 +16,7 @@
 				{{produto.codigo}}
 			</td>
 			<td data-title="'DESCRIÇÃO DO PRODUTO'" sortable="'descricao'" filter="filterDef">
-				<a ng-href="#/">{{produto.descricao}}</a>
+				<a ng-href="#/produto/{{produto._id}}">{{produto.descricao}}</a>
 			</td>
 			<td data-title="'QTDE.'" sortable="'qtde'" filter="{'qtde': 'number'}">
 				{{produto.qtde | number}}

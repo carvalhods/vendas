@@ -1,0 +1,59 @@
+<h2 class="ui dividing header">Cadastro de Produtos</h2>
+
+<form ng-submit="salva()" class="ui form">
+    <div class="fields">
+        <div class="two wide field">
+            <label>CÓDIGO</label>
+            <input type="text" ng-model="produto.codigo" disabled="disabled" />
+        </div>
+        <div class="fourteen wide field">
+            <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
+            <input type="text" name="descricao" id="descricao" maxlength="100"
+                    ng-model="produto.descricao" ng-change="toUpper()" />
+        </div>
+    </div>
+
+    <div class="fields">
+        <div class="two wide field">
+            <label for="qtde">QTDE.</label>
+            <input type="number" name="qtde" id="qtde" min="0" max="9999999" ng-model="produto.qtde" />
+        </div>
+        <div class="field">
+            <label for="unid">UNIDADE</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="unidade" ng-model="produto.unidade" />
+                <i class="dropdown icon"></i>
+                <div class="default text"></div>
+                <div class="menu">
+                    <div class="item" data-value="0">UN</div>
+                    <div class="item" data-value="PÇ">PÇ</div>
+                    <div class="item" data-value="CX">CX</div>
+                    <div class="item" data-value="KG">KG</div>
+                    <div class="item" data-value="M">M</div>
+                    <div class="item" data-value="M²">M²</div>
+                    <div class="item" data-value="M³">M³</div>
+                    <div class="item" data-value="L">L</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="estoqueMin">ESTOQUE MÍNIMO</label>
+            <input type="number" name="estoqueMin" id="estoqueMin" min="0" max="9999999" ng-model="produto.estoqueMin" />
+        </div>
+        <div class="field">
+            <label for="valor">VALOR UNITÁRIO</label>
+            <div class="ui left labeled input">
+                <div class="ui label">R$</div>
+                <input type="text" name="valor" id="valor" ng-model="produto.valor" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+$(document).ready(function(){
+    $("#descricao").focus();
+    $(".dropdown").dropdown();
+});
+</script>
