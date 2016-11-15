@@ -16,7 +16,7 @@ module.exports = function(app){
             trim: true,
             match: [/^[\wÀ-Úà-ú]+/, "A descrição do produto deve conter apenas letras no início"],
             minlength: [2, 'A descrição do produto precisa conter no mínimo {MINLENGTH} caracteres'],
-            maxlength: [70, 'A descrição do produto deve conter no máximo {MAXLENGTH} caracteres']
+            maxlength: [100, 'A descrição do produto deve conter no máximo {MAXLENGTH} caracteres']
         },
         unidade: {
             type: String,
@@ -62,27 +62,7 @@ module.exports = function(app){
                 return next(new Error('Não foi possível verificar lançamentos de vendas deste produto'));
             }
         )
-    })
-
-    /*
-    Schema.methods.checaVendas = function(idProduto, cb) {
-        var Venda = app.models.Venda;
-        Venda.findOne({itens: {$elemMatch: {produto: mongoose.Types.ObjectId(idProduto)}}})
-        .exec()
-        .then(
-            function(venda){
-                if (venda) {
-                    return cb(new Error('Há lançamentos de vendas deste produto, não é possível excluí-lo'), true);
-                } else {
-                    cb(null, false);
-                }
-            },
-            function(err){
-                return cb(new Error('Não foi possível verificar lançamentos de vendas deste produto'), true);
-            }
-        )
-    };
-    */
+    });
 
     autoIncrement.initialize(mongoose.connection);
     Schema.plugin(autoIncrement.plugin, {

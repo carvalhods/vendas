@@ -1,4 +1,4 @@
-angular.module('vendas', ['ngRoute', 'ngResource', 'smart-table'])
+angular.module('vendas', ['ngRoute', 'ngResource', 'ngTable'])
 	.config(function($routeProvider){
 
 		$routeProvider.when("/produtos", {

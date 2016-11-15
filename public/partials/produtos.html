@@ -1,6 +1,51 @@
 <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
-
+<div class="divTable">
+	<table ng-table="produtosTable" show-filter="true" class="ui table fixed very compact striped selectable">
+		<colgroup>
+			<col />
+			<col width="48%" />
+			<col />
+			<col />
+			<col />
+			<col width="12%" />
+			<col />
+		</colgroup>
+		<tr ng-repeat="produto in $data" ng-class="{ 'negative': produto.status == 'Baixo' }">
+			<td data-title="'CÓDIGO'" sortable="'codigo'" filter="{'codigo':'number'}">
+				{{produto.codigo}}
+			</td>
+			<td data-title="'DESCRIÇÃO DO PRODUTO'" sortable="'descricao'" filter="filterDef">
+				<a ng-href="#/">{{produto.descricao}}</a>
+			</td>
+			<td data-title="'QTDE.'" sortable="'qtde'" filter="{'qtde': 'number'}">
+				{{produto.qtde | number}}
+			</td>
+			<td data-title="'ESTOQUE MÍNIMO'" sortable="'estoqueMin'" filter="{'estoqueMin': 'number'}">
+				{{produto.estoqueMin | number}}
+			</td>
+			<td data-title="'STATUS'" sortable="'status'" filter="{'status': 'text'}"
+				ng-class="{'positive': produto.status == 'Normal'}">
+				{{produto.status}}
+			</td>
+			<td data-title="'VALOR UNITÁRIO'" sortable="'valor'" filter="{'valor': 'number'}">
+				{{produto.valor | currency:"R$ "}}
+			</td>
+			<td>
+				<button class="ui button mini compact" ng-click="remove(produto)">
+					Excluir
+				</button>
+			</td>
+		</tr>
+		<tfoot>
+			<tr>
+				<td colspan="2">
+					<a ng-href="#/produto/novo" class="ui compact teal button">Novo Produto</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
 
 <script>
 if (!$("#produtos").hasClass("active")){
