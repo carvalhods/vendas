@@ -1,6 +1,6 @@
 <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
-<form ng-submit="salva()" class="ui form">
+<form class="ui form">
     <div class="fields">
         <div class="two wide field">
             <label>CÓDIGO</label>
@@ -9,7 +9,7 @@
         <div class="fourteen wide field">
             <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
             <input type="text" name="descricao" id="descricao" maxlength="100"
-                    ng-model="produto.descricao" ng-change="toUpper()" />
+                    ng-model="produto.descricao" ng-blur="toUpper()" />
         </div>
     </div>
 
@@ -20,8 +20,7 @@
         </div>
         <div class="field">
             <label for="unid">UNIDADE</label>
-            <div class="ui selection dropdown" id="selectUnid">
-                <input type="text" name="unidade" id="unidade" style="display:none" ng-model="produto.unidade" />
+            <div class="ui selection dropdown" id="selectUnid" ng-model="produto.unidade" dropdown>                
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
@@ -32,32 +31,31 @@
                     <div class="item" data-value="M">M</div>
                     <div class="item" data-value="M²">M²</div>
                     <div class="item" data-value="M³">M³</div>
-                    <div class="item" data-value="L">L</div>
+                    <div class="item" data-value="L">L</div>                    
                 </div>
             </div>
         </div>
-        <div class="two wide field">
+        <div class="three wide field">
             <label for="estoqueMin">ESTOQUE MÍNIMO</label>
             <input type="number" name="estoqueMin" id="estoqueMin" min="0" max="9999999" ng-model="produto.estoqueMin" />
         </div>
         <div class="field">
             <label for="valorMasked">VALOR UNITÁRIO</label>
-            <input type="text" name="valorMasked" id="valorMasked" />
-            <input type="text" name="valor" id="valor" style="display:none" ng-model="produto.valor" /> 
+            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valorMasked"/>
+            <input type="text" name="valor" id="valor" style="display:none" ng-model="produto.valor" />
         </div>
     </div>
-
 </form>
+
+<button ng-click="produto.unidade = 'M'" class="ui teal button">Salvar</button>
+<a ng-href="#/produtos" class="ui grey button">Voltar</a>
 
 <script>
 $(document).ready(function(){
     $("#descricao").focus();
-    $("#selectUnid").dropdown('set text', $("#unidade").val());
-    $("#selectUnid").dropdown({
-        onChange: function(value, text, $selectedItem) {
-            $("#unidade").val(value);            
-        }
-    })
+    
+    $("#selectUnid").dropdown();
+    
     $("#valorMasked").maskMoney({
         prefix: 'R$ ',
         allowNegative: false,
@@ -65,14 +63,16 @@ $(document).ready(function(){
         decimal: ',',
         affixesStay: true
     });
+    /*
+    $("#valorMasked").change(function(){
+        $("#valor").val( $("#valorMasked").maskMoney('unmasked')[0] );
+    });    
     $("#valor").change(function(){
         $("#valorMasked").maskMoney('mask', parseFloat($("#valor").val()));
     });
-    $("#valor").change();
-    $("#valorMasked").change(function(){
-        $("#valor").val( $("#valorMasked").maskMoney('unmasked')[0] );
-        console.log( $("#valor").val() );
-    });
+    $("#valorMasked").maskMoney('mask', parseFloat($("#valor").val()));
+    */
+
     if (!$("#produtos").hasClass("active")){
         $("#mainMenu a").removeClass("active teal");
         $("#produtos").addClass("active teal");

@@ -21,6 +21,7 @@ module.exports = function(app){
         unidade: {
             type: String,
             required: [true, "É necessário preencher o campo {PATH}"],
+            default: 'UN',
             enum: {
                 values: ['UN', 'PÇ', 'CX', 'KG', 'M', 'M²', 'M³', 'L'],
                 message: "O campo '{PATH}' não foi preenchido corretamente"
@@ -29,7 +30,6 @@ module.exports = function(app){
         qtde: {
             type: Number,
             required: [true, "É necessário preencher o campo {PATH}"],
-            default: 0,
             min: [0, 'A qtde. do produto deve ser maior ou igual a zero'],
             max: [9999999, 'Qtde. máxima ultrapassada']
         },
