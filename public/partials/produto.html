@@ -20,12 +20,12 @@
         </div>
         <div class="field">
             <label for="unid">UNIDADE</label>
-            <div class="ui selection dropdown">
-                <input type="hidden" name="unidade" ng-model="produto.unidade" />
+            <div class="ui selection dropdown" id="selectUnid">
+                <input type="text" name="unidade" id="unidade" style="display:none" ng-model="produto.unidade" />
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
-                    <div class="item" data-value="0">UN</div>
+                    <div class="item" data-value="UN">UN</div>
                     <div class="item" data-value="PÇ">PÇ</div>
                     <div class="item" data-value="CX">CX</div>
                     <div class="item" data-value="KG">KG</div>
@@ -36,16 +36,14 @@
                 </div>
             </div>
         </div>
-        <div class="field">
+        <div class="two wide field">
             <label for="estoqueMin">ESTOQUE MÍNIMO</label>
             <input type="number" name="estoqueMin" id="estoqueMin" min="0" max="9999999" ng-model="produto.estoqueMin" />
         </div>
         <div class="field">
-            <label for="valor">VALOR UNITÁRIO</label>
-            <div class="ui left labeled input">
-                <div class="ui label">R$</div>
-                <input type="text" name="valor" id="valor" ng-model="produto.valor" />
-            </div>
+            <label for="valorMasked">VALOR UNITÁRIO</label>
+            <input type="text" name="valorMasked" id="valorMasked" />
+            <input type="text" name="valor" id="valor" style="display:none" ng-model="produto.valor" /> 
         </div>
     </div>
 
@@ -54,6 +52,30 @@
 <script>
 $(document).ready(function(){
     $("#descricao").focus();
-    $(".dropdown").dropdown();
+    $("#selectUnid").dropdown('set text', $("#unidade").val());
+    $("#selectUnid").dropdown({
+        onChange: function(value, text, $selectedItem) {
+            $("#unidade").val(value);            
+        }
+    })
+    $("#valorMasked").maskMoney({
+        prefix: 'R$ ',
+        allowNegative: false,
+        thousands: '.',
+        decimal: ',',
+        affixesStay: true
+    });
+    $("#valor").change(function(){
+        $("#valorMasked").maskMoney('mask', parseFloat($("#valor").val()));
+    });
+    $("#valor").change();
+    $("#valorMasked").change(function(){
+        $("#valor").val( $("#valorMasked").maskMoney('unmasked')[0] );
+        console.log( $("#valor").val() );
+    });
+    if (!$("#produtos").hasClass("active")){
+        $("#mainMenu a").removeClass("active teal");
+        $("#produtos").addClass("active teal");
+    }
 });
 </script>
