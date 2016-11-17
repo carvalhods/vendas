@@ -24,10 +24,27 @@ angular.module("vendas").controller("ProdutoController",
         }
         
         $scope.salva = function(){
-            $scope.produto.valor = toFloat($scope.produto.valor);
+            /*
+            $scope.produto.qtde = parseFloat($scope.produto.qtde);
+            $scope.produto.estoqueMin = parseFloat($scope.produto.estoqueMin);
+            */
+            $scope.produto.valor = toFloat($scope.produto.valor);         
             
-            if ($routeParams != 'novo') {
+            if ($routeParams.id != 'novo') {
                 Produto.update(
+                    $scope.produto,
+                    function(){
+                        console.log('Salvo com sucesso');
+                    },
+                    function(erro){
+                        //console.error(erro.data.errors);
+                        for (var attr in erro.data.errors) {
+                            console.log(erro.data.errors[attr]);
+                        }
+                    }
+                );
+            } else {                
+                Produto.save(
                     $scope.produto,
                     function(){
                         console.log('Salvo com sucesso');
