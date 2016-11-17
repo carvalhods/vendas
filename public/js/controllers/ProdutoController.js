@@ -27,7 +27,7 @@ angular.module("vendas").controller("ProdutoController",
             if (!ngModel) return;
 
             ngModel.$render = function () {
-                elms.dropdown('set selected', ngModel.$viewValue);
+                elms.dropdown('set selected', ngModel.$viewValue);                
             };
 
             elms.dropdown({
