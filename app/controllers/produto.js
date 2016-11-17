@@ -73,7 +73,7 @@ module.exports = function(app){
                             }
                             produto.save(function(err){
                                 if (!err) {
-                                    res.status(201).end({success: true});
+                                    res.status(201).json({success: true});
                                 } else {
                                     res.status(500).json(err);
                                 }

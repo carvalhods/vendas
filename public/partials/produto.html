@@ -41,20 +41,17 @@
         </div>
         <div class="field">
             <label for="valorMasked">VALOR UNITÁRIO</label>
-            <input type="text" name="valorMasked" id="valorMasked" masked />
-            <input type="text" name="valor" id="valor" style="display:none" ng-model="produto.valor" />
+            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valor" masked />            
         </div>
     </div>
 </form>
 
-<button ng-click="produto.unidade = 'M'" class="ui teal button">Salvar</button>
+<button ng-click="salva()" class="ui teal button">Salvar</button>
 <a ng-href="#/produtos" class="ui grey button">Voltar</a>
 
-<script>    
+<script>
 $(document).ready(function(){    
     $("#descricao").focus();
-    
-    $("#selectUnid").dropdown();
     
     $("#valorMasked").maskMoney({
         prefix: 'R$ ',
@@ -63,15 +60,6 @@ $(document).ready(function(){
         decimal: ',',
         affixesStay: true
     });
-    $("#valorMasked").change(function(){
-        $("#valor").val( $("#valorMasked").maskMoney('unmasked')[0]);
-    });
-    $("#valor").change(function(){
-        $("#valorMasked").maskMoney('mask', parseFloat($("#valor").val()));
-    });    
-    setTimeout(function(){
-       $("#valor").change();
-    }, 50);
 
     if (!$("#produtos").hasClass("active")){
         $("#mainMenu a").removeClass("active teal");
