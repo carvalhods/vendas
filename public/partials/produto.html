@@ -20,7 +20,7 @@
         </div>
         <div class="field">
             <label for="unid">UNIDADE</label>
-            <div class="ui selection dropdown" id="selectUnid" ng-model="produto.unidade" dropdown>                
+            <div class="ui selection dropdown" id="selectUnid" ng-model="produto.unidade" dropdown>
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
@@ -31,7 +31,7 @@
                     <div class="item" data-value="M">M</div>
                     <div class="item" data-value="M²">M²</div>
                     <div class="item" data-value="M³">M³</div>
-                    <div class="item" data-value="L">L</div>                    
+                    <div class="item" data-value="L">L</div>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="field">
             <label for="valorMasked">VALOR UNITÁRIO</label>
-            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valor" masked />            
+            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valor" autocomplete="off" masked />
         </div>
     </div>
 </form>
@@ -50,9 +50,9 @@
 <a ng-href="#/produtos" class="ui grey button">Voltar</a>
 
 <script>
-$(document).ready(function(){    
+$(document).ready(function(){
     $("#descricao").focus();
-    
+
     $("#valorMasked").maskMoney({
         prefix: 'R$ ',
         allowNegative: false,

@@ -9,27 +9,24 @@ angular.module("vendas").controller("ProdutoController",
                 console.error(erro);
             }
         );
-        
+
         $scope.toUpper = function(){
             if($scope.produto.descricao) {
                 $scope.produto.descricao = $scope.produto.descricao.toUpperCase();
             }
         };
-    
+
         function toFloat(valor) {
             if (typeof valor == "string" ) {
                 return parseFloat(valor.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
             }
             return valor;
         }
-        
+
         $scope.salva = function(){
-            /*
-            $scope.produto.qtde = parseFloat($scope.produto.qtde);
-            $scope.produto.estoqueMin = parseFloat($scope.produto.estoqueMin);
-            */
-            $scope.produto.valor = toFloat($scope.produto.valor);         
-            
+
+            $scope.produto.valor = toFloat($scope.produto.valor);
+
             if ($routeParams.id != 'novo') {
                 Produto.update(
                     $scope.produto,
@@ -37,13 +34,12 @@ angular.module("vendas").controller("ProdutoController",
                         console.log('Salvo com sucesso');
                     },
                     function(erro){
-                        //console.error(erro.data.errors);
                         for (var attr in erro.data.errors) {
                             console.log(erro.data.errors[attr]);
                         }
                     }
                 );
-            } else {                
+            } else {
                 Produto.save(
                     $scope.produto,
                     function(){
@@ -65,13 +61,13 @@ angular.module("vendas").controller("ProdutoController",
             if (!ngModel) return;
 
             ngModel.$render = function() {
-                elms.dropdown('set selected', ngModel.$viewValue);       
-                
-                elms.dropdown({                    
+                elms.dropdown('set selected', ngModel.$viewValue);
+
+                elms.dropdown({
                     onChange: function(value, text, $selectedItem) {
-                        ngModel.$setViewValue(value);                        
+                        ngModel.$setViewValue(value);
                     }
-                });                
+                });
             };
         }
     };
@@ -83,10 +79,10 @@ angular.module("vendas").controller("ProdutoController",
         link: function (scope, elms, attrs, ngModel) {
             if (!ngModel) return;
 
-            ngModel.$render = function() {                
+            ngModel.$render = function() {
                 setTimeout(function(){
-                    elms.maskMoney('mask', parseFloat(ngModel.$viewValue));                    
-                }, 50);            
+                    elms.maskMoney('mask', parseFloat(ngModel.$viewValue));
+                }, 50);
             };
         }
     };
