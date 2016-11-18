@@ -34,8 +34,11 @@ angular.module("vendas").controller("ProdutoController",
                         console.log('Salvo com sucesso');
                     },
                     function(erro){
-                        for (var attr in erro.data.errors) {
-                            console.log(erro.data.errors[attr]);
+                        console.log(erro);
+                        if (erro.data) {
+                            for (var attr in erro.data.errors) {
+                                //console.log(erro.data.errors[attr]);
+                            }
                         }
                     }
                 );
