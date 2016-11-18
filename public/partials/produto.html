@@ -16,7 +16,7 @@
     <div class="fields">
         <div class="two wide field">
             <label for="qtde">QTDE.</label>
-            <input type="number" name="qtde" id="qtde" min="0" max="9999999" ng-model="produto.qtde" />
+            <input type="number" name="qtde" id="qtde" min="" max="" ng-model="produto.qtde"/>
         </div>
         <div class="field">
             <label for="unid">UNIDADE</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="three wide field">
             <label for="estoqueMin">ESTOQUE MÍNIMO</label>
-            <input type="number" name="estoqueMin" id="estoqueMin" min="0" max="9999999" ng-model="produto.estoqueMin" />
+            <input type="number" name="estoqueMin" id="estoqueMin" min="" max="" ng-model="produto.estoqueMin" />
         </div>
         <div class="field">
             <label for="valorMasked">VALOR UNITÁRIO</label>
@@ -61,6 +61,9 @@ $(document).ready(function(){
         affixesStay: true
     });
 
+    $("input[type=number]").attr("min", "0");
+    $("input[type=number]").attr("man", "9999999");
+    
     if (!$("#produtos").hasClass("active")){
         $("#mainMenu a").removeClass("active teal");
         $("#produtos").addClass("active teal");
