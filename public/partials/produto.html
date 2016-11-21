@@ -1,5 +1,13 @@
 <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
+<div class="ui message" ng-show="status.salvo || status.erros.length" 
+     ng-class="{ 'success': status.salvo, 'error': status.erros.length > 0 }">
+    <div class="header">{{status.msg}}</div>
+    <ul class="list" ng-show="status.erros.length > 0">
+       <li ng-repeat="erro in status.erros">{{erro}}</li>
+    </ul>
+</div>
+
 <form class="ui form">
     <div class="fields">
         <div class="two wide field">
@@ -8,8 +16,8 @@
         </div>
         <div class="fourteen wide field">
             <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
-            <input type="text" name="descricao" id="descricao" maxlength="100"
-                    ng-model="produto.descricao" ng-blur="toUpper()" />
+            <input type="text" name="descricao" id="descricao" maxlength="100" autocomplete="off" 
+                   ng-model="produto.descricao" ng-blur="toUpper()" />
         </div>
     </div>
 

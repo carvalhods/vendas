@@ -71,7 +71,7 @@ module.exports = function(app){
                         if (produto){
                             for (var campo in req.body) {
                                 produto[campo] = req.body[campo];
-                            }
+                            }                            
                             produto.save(function(err){
                                 if (!err) {
                                     res.status(201).json({success: true});

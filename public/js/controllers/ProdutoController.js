@@ -1,5 +1,12 @@
 angular.module("vendas").controller("ProdutoController",
     function($scope, $routeParams, Produto){
+    
+        $scope.status = {
+            salvo: false,
+            erros: [],
+            msg: null
+        };
+    
         Produto.get(
             { id: $routeParams.id },
             function(produto) {
@@ -23,36 +30,57 @@ angular.module("vendas").controller("ProdutoController",
             return valor;
         }
 
-        $scope.salva = function(){
-
+        $scope.salva = function(){            
             $scope.produto.valor = toFloat($scope.produto.valor);
+            $scope.status = { erros: [] };
 
+            if (typeof $scope.produto.qtde != "number" || typeof $scope.produto.estoqueMin != "number") { 
+                trataErros({data: {message: "O valor de 'Qtde.' ou 'Estoque Mínimo' não é um número válido"}});
+                return null;
+            }
+            
             if ($routeParams.id != 'novo') {
                 Produto.update(
                     $scope.produto,
                     function(){
-                        console.log('Salvo com sucesso');
+                        $scope.status.salvo = true;
+                        $scope.status.erros = [];
+                        $scope.status.msg = 'Salvo com sucesso';                        
                     },
                     function(erro){
-                        console.log(erro);
-                        if (erro.data) {
-                            for (var attr in erro.data.errors) {
-                                //console.log(erro.data.errors[attr]);
-                            }
-                        }
+                        trataErros(erro);
                     }
                 );
             } else {
                 Produto.save(
                     $scope.produto,
                     function(){
-                        console.log('Salvo com sucesso');
+                        $scope.status.salvo = true;
+                        $scope.status.erros = [];
+                        $scope.status.msg = 'Salvo com sucesso'; 
                     },
                     function(erro){
-                        console.error(erro);
+                        trataErros(erro);
                     }
                 );
             }
+        }
+        
+        function trataErros(erro) {
+            console.error(erro);
+            $scope.status.salvo = false;
+            $scope.status.msg = 'Não foi possível salvar os dados do produto';
+            if (erro.data) {
+                if (erro.data.errors) {
+                    for (var attr in erro.data.errors) {
+                        $scope.status.erros.push(erro.data.errors[attr].message);
+                    }
+                } else {
+                    $scope.status.erros.push(erro.data.message);
+                }
+            } else {
+                $scope.status.erros.push('Falha na conexão com o servidor');
+            }            
         }
     }
 )
@@ -62,10 +90,8 @@ angular.module("vendas").controller("ProdutoController",
         require: 'ngModel',
         link: function (scope, elms, attrs, ngModel) {
             if (!ngModel) return;
-
             ngModel.$render = function() {
                 elms.dropdown('set selected', ngModel.$viewValue);
-
                 elms.dropdown({
                     onChange: function(value, text, $selectedItem) {
                         ngModel.$setViewValue(value);
@@ -81,7 +107,6 @@ angular.module("vendas").controller("ProdutoController",
         require: 'ngModel',
         link: function (scope, elms, attrs, ngModel) {
             if (!ngModel) return;
-
             ngModel.$render = function() {
                 setTimeout(function(){
                     elms.maskMoney('mask', parseFloat(ngModel.$viewValue));
