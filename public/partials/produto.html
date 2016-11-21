@@ -17,7 +17,7 @@
         <div class="fourteen wide field">
             <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
             <input type="text" name="descricao" id="descricao" maxlength="100" autocomplete="off" 
-                   ng-model="produto.descricao" ng-blur="toUpper()" />
+                   ng-model="produto.descricao" ng-blur="toUpper()" focus-me="focusDescricao"/>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
     </div>
 </form>
 
-<button ng-click="salva()" class="ui teal button">Salvar</button>
+<button ng-click="salva(); focusDescricao=true" class="ui teal button">Salvar</button>
 <a ng-href="#/produtos" class="ui grey button">Voltar</a>
 
 <script>
