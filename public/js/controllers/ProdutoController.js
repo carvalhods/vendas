@@ -1,11 +1,14 @@
 angular.module("vendas").controller("ProdutoController",
     function($scope, $routeParams, Produto){
-    
-        $scope.status = {
-            salvo: false,
-            erros: [],
-            msg: null
-        };
+
+        $scope.limpaMsg = function(){
+            $scope.status = {
+                salvo: false,
+                erros: [],
+                msg: null
+            };
+        }
+        $scope.limpaMsg();
     
         Produto.get(
             { id: $routeParams.id },

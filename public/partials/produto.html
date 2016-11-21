@@ -16,19 +16,19 @@
         </div>
         <div class="fourteen wide field">
             <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
-            <input type="text" name="descricao" id="descricao" maxlength="100" autocomplete="off" 
-                   ng-model="produto.descricao" ng-blur="toUpper()" focus-me="focusDescricao"/>
+            <input type="text" name="descricao" id="descricao" maxlength="100" autocomplete="off" focus-me="focusDescricao" 
+                   ng-model="produto.descricao" ng-blur="toUpper()" ng-change="limpaMsg()"/>
         </div>
     </div>
 
     <div class="fields">
         <div class="two wide field">
             <label for="qtde">QTDE.</label>
-            <input type="number" name="qtde" id="qtde" min="" max="" ng-model="produto.qtde"/>
+            <input type="number" name="qtde" id="qtde" min="" max="" ng-model="produto.qtde" ng-change="limpaMsg()"/>
         </div>
         <div class="field">
             <label for="unid">UNIDADE</label>
-            <div class="ui selection dropdown" id="selectUnid" ng-model="produto.unidade" dropdown>
+            <div class="ui selection dropdown" id="selectUnid" ng-model="produto.unidade" dropdown ng-change="limpaMsg()">
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
@@ -45,11 +45,11 @@
         </div>
         <div class="three wide field">
             <label for="estoqueMin">ESTOQUE MÍNIMO</label>
-            <input type="number" name="estoqueMin" id="estoqueMin" min="" max="" ng-model="produto.estoqueMin" />
+            <input type="number" name="estoqueMin" id="estoqueMin" min="" max="" ng-model="produto.estoqueMin" ng-change="limpaMsg()"/>
         </div>
         <div class="field">
             <label for="valorMasked">VALOR UNITÁRIO</label>
-            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valor" autocomplete="off" masked />
+            <input type="text" name="valorMasked" id="valorMasked" ng-model="produto.valor" autocomplete="off" masked ng-change="limpaMsg()"/>
         </div>
     </div>
 </form>

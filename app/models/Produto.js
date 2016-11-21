@@ -14,7 +14,7 @@ module.exports = function(app){
             type: String,
             uppercase: true,
             trim: true,
-            match: [/^[\wÀ-Úà-ú]+/, "A descrição do produto deve conter apenas letras no início"],
+            match: [/^[a-zA-ZÀ-Úà-ú]+/, "A descrição do produto deve conter apenas letras no início"],
             minlength: [2, 'A descrição do produto precisa conter no mínimo {MINLENGTH} caracteres'],
             maxlength: [100, 'A descrição do produto deve conter no máximo {MAXLENGTH} caracteres']
         },
