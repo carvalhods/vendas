@@ -9,16 +9,19 @@ angular.module("vendas").controller("ProdutoController",
             };
         }
         $scope.limpaMsg();
-    
-        Produto.get(
-            { id: $routeParams.id },
-            function(produto) {
-                $scope.produto = produto;
-            },
-            function(erro){
-                console.error(erro);
-            }
-        );
+
+        function buscaProduto(_id){
+            Produto.get(
+                { id: _id },
+                function(produto) {
+                    $scope.produto = produto;
+                },
+                function(erro){
+                    trataErros(erro);
+                }
+            );
+        }
+        buscaProduto($routeParams.id);
 
         $scope.toUpper = function(){
             if($scope.produto.descricao) {
@@ -60,7 +63,8 @@ angular.module("vendas").controller("ProdutoController",
                     function(){
                         $scope.status.salvo = true;
                         $scope.status.erros = [];
-                        $scope.status.msg = 'Salvo com sucesso'; 
+                        $scope.status.msg = 'Salvo com sucesso';
+                        buscaProduto('novo');
                     },
                     function(erro){
                         trataErros(erro);
