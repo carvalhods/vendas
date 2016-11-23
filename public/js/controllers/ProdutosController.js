@@ -1,5 +1,5 @@
 angular.module("vendas").controller("ProdutosController",
-	function($scope, Produto, NgTableParams) {
+	function($scope, Produto, NgTableParams, $location) {
 
 		function preencheTable(produtos) {
 			produtos = produtos.map(function(produto){
@@ -29,6 +29,19 @@ angular.module("vendas").controller("ProdutosController",
 				}
 			);
 		}
+    
+        $scope.remove = function(produto){
+            $scope.status = {};
+            Produto.delete(
+                {id: produto._id},
+                function(){
+                    buscaProdutos();
+                },
+                function(erro){
+                    trataErros(erro, "Não foi possível excluir o produto");
+                }
+            )
+        }
 
 		function buscaProdutos(){
 			Produto.query(
@@ -36,12 +49,32 @@ angular.module("vendas").controller("ProdutosController",
 					preencheTable(produtos);
 				},
 				function(erro){
-					console.error(erro);
+					trataErros(erro, "Não foi possível obter a lista de produtos");
 					preencheTable([]);
 				}
 			)
 		}
-
+    
 		buscaProdutos();
+    
+        function trataErros(erro, msg) {
+            console.error(erro);            
+            $scope.status = {
+                msg: msg,
+                erros: []
+            };            
+            if (erro.data) {
+                if (erro.data.errors) {
+                    for (var attr in erro.data.errors) {
+                        $scope.status.erros.push(erro.data.errors[attr].message);
+                    }
+                } else {
+                    $scope.status.erros.push(erro.data.message || erro.data);
+                }
+            }
+            else {
+                $scope.status.erros.push('Falha na conexão com o servidor');
+            }
+        }
 	}
 )

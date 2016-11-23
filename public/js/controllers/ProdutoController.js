@@ -83,7 +83,7 @@ angular.module("vendas").controller("ProdutoController",
                         $scope.status.erros.push(erro.data.errors[attr].message);
                     }
                 } else {
-                    $scope.status.erros.push(erro.data.message);
+                    $scope.status.erros.push(erro.data.message || erro.data);
                 }
             } else {
                 $scope.status.erros.push('Falha na conexão com o servidor');

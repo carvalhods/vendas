@@ -1,5 +1,12 @@
 <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
+<div class="ui error message" ng-show="status.erros.length">
+    <div class="ui header">{{status.msg}}</div>
+    <ul class="list">
+        <li ng-repeat="erro in status.erros">{{erro}}</li>
+    </ul>
+</div>
+
 <div class="divTable">
 	<table ng-table="produtosTable" show-filter="true" class="ui table fixed very compact striped selectable">
 		<colgroup>
@@ -32,9 +39,21 @@
 				{{produto.valor | currency:"R$ "}}
 			</td>
 			<td>
-				<button class="ui mini compact grey button" ng-click="remove(produto)">
+				<button class="ui mini compact grey button btnExcluir" data-position="left center">
 					Excluir
 				</button>
+                <div class="ui popup warning message">
+                    Deseja realmente excluir este produto? &nbsp;
+                    <button class="ui compact grey button" ng-click="remove(produto)" onclick="$('.btnExcluir').popup('hide')">Sim</button>
+                    <button class="ui compact teal button" onclick="$('.btnExcluir').popup('hide')">Não</button>
+                </div>
+                <script>
+                    $(".btnExcluir").popup({
+                        inline: true,
+                        popup: $(".popup"),
+                        on: 'click'        
+                    }); 
+                </script>
 			</td>
 		</tr>
 		<tfoot>
@@ -48,8 +67,10 @@
 </div>
 
 <script>
-if (!$("#produtos").hasClass("active")){
-	$("#mainMenu a").removeClass("active teal");
-	$("#produtos").addClass("active teal");
-}
+$(document).ready(function(){  
+    if (!$("#produtos").hasClass("active")){
+        $("#mainMenu a").removeClass("active teal");
+        $("#produtos").addClass("active teal");
+    }
+})
 </script>
