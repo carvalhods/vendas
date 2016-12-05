@@ -19,6 +19,8 @@
     "semantic": "semantic-ui#^2.2.6",
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
-    "angular-resource": "^1.5.8"
+    "angular-resource": "^1.5.8",
+    "angular-i18n": "^1.5.8",
+    "jquery-maskmoney": "^3.0.2"
   }
 }

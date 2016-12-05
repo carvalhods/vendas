@@ -7,6 +7,7 @@ module.exports = function(){
 	var app = express();
 	app.set('port', settings.port);
 	app.use(express.static('./public'));
+	app.use(express.static('./node_modules/ng-table/bundles'));
 	app.set('view engine', 'ejs');
 	app.set('views', './app/views');
 

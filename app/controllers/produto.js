@@ -63,6 +63,7 @@ module.exports = function(app){
 
         updateProduto: function(req, res){
             var _id = req.body._id;
+            if (req.body.codigo) { delete req.body.codigo }
             if (_id) {
                 Produto.findOne({_id: _id}).exec()
                 .then(
@@ -70,10 +71,10 @@ module.exports = function(app){
                         if (produto){
                             for (var campo in req.body) {
                                 produto[campo] = req.body[campo];
-                            }
+                            }                            
                             produto.save(function(err){
                                 if (!err) {
-                                    res.status(201).end({success: true});
+                                    res.status(201).json({success: true});
                                 } else {
                                     res.status(500).json(err);
                                 }
