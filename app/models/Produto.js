@@ -1,13 +1,12 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
+mongoose.Promise = global.Promise;
 
 module.exports = function(app){
     var Schema = mongoose.Schema({
         codigo: {
             type: Number,
             required: true,
-            uppercase: true,
-            trim: true,
             index: { unique: true }
         },
         descricao: {
@@ -31,7 +30,7 @@ module.exports = function(app){
             type: Number,
             required: [true, "É necessário preencher o campo {PATH}"],
             min: [0, 'A qtde. do produto deve ser maior ou igual a zero'],
-            max: [9999999, 'Qtde. máxima ultrapassada']            
+            max: [9999999, 'Qtde. máxima ultrapassada']
         },
         estoqueMin: {
             type: Number,

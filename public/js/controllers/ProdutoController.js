@@ -36,22 +36,21 @@ angular.module("vendas").controller("ProdutoController",
             return valor;
         }
 
-        $scope.salva = function(){            
+        $scope.salva = function(){
             $scope.produto.valor = toFloat($scope.produto.valor);
             $scope.status = { erros: [] };
 
-            if (typeof $scope.produto.qtde != "number" || typeof $scope.produto.estoqueMin != "number") { 
+            if (typeof $scope.produto.qtde != "number" || typeof $scope.produto.estoqueMin != "number") {
                 trataErros({data: {message: "O valor de 'Qtde.' ou 'Estoque Mínimo' não é um número válido"}});
-                return null;
             }
-            
+
             if ($routeParams.id != 'novo') {
                 Produto.update(
                     $scope.produto,
                     function(){
                         $scope.status.salvo = true;
                         $scope.status.erros = [];
-                        $scope.status.msg = 'Salvo com sucesso';                        
+                        $scope.status.msg = 'Salvo com sucesso';
                     },
                     function(erro){
                         trataErros(erro);
@@ -72,7 +71,7 @@ angular.module("vendas").controller("ProdutoController",
                 );
             }
         }
-        
+
         function trataErros(erro) {
             console.error(erro);
             $scope.status.salvo = false;
@@ -87,7 +86,7 @@ angular.module("vendas").controller("ProdutoController",
                 }
             } else {
                 $scope.status.erros.push('Falha na conexão com o servidor');
-            }            
+            }
         }
     }
 )
@@ -127,9 +126,9 @@ angular.module("vendas").controller("ProdutoController",
     scope: { trigger: '=focusMe' },
     link: function(scope, element) {
       scope.$watch('trigger', function(value) {
-        if(value === true) { 
+        if(value === true) {
             element[0].focus();
-            scope.trigger = false;          
+            scope.trigger = false;
         }
       });
     }
