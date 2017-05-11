@@ -8,7 +8,7 @@ module.exports = function(app){
             .exec()
             .then(
                 function(produtos) {
-                    res.json(produtos);
+                    res.status(200).json(produtos);
                 },
                 function(erro) {
                     res.status(500).json(erro);
@@ -24,7 +24,7 @@ module.exports = function(app){
                         if (!err) {
                             var produto = new Produto();
                             produto.codigo = count;
-                            res.json(produto);
+                            res.status(200).json(produto);
                         } else {
                             res.status(500).json(err);
                         }
@@ -36,7 +36,7 @@ module.exports = function(app){
                     .then(
                         function(produto) {
                             produto ?
-                            res.json(produto) :
+                            res.status(200).json(produto) :
                             res.status(404).json('Produto não localizado');
                         },
                         function(err){
@@ -53,7 +53,7 @@ module.exports = function(app){
             Produto.create(produto)
             .then(
                 function(produto){
-                    res.json(produto);
+                    res.status(200).json(produto);
                 },
                 function(erro){
                     res.status(500).json(erro);
@@ -71,7 +71,7 @@ module.exports = function(app){
                         if (produto){
                             for (var campo in req.body) {
                                 produto[campo] = req.body[campo];
-                            }                            
+                            }
                             produto.save(function(err){
                                 if (!err) {
                                     res.status(201).json({success: true});

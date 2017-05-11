@@ -4,19 +4,22 @@ module.exports = function(app) {
   var controller = {
     listaVendas: function(req, res) {
       if (req.query.dataInicio && req.query.dataFim) {
-        Venda.find()
+        Venda.find({ $and: [
+          {dataVenda: {$gte: req.query.dataInicio}},
+          {dataVenda: {$lte: req.query.dataFim}}
+        ]})
         .populate('itens.produto')
         .exec()
         .then(
           function(produtos) {
-            res.json(produtos);
+            res.status(200).json(produtos);
           },
           function(err) {
             res.status(500).json(err)
           }
         )
       } else {
-        res.status(400).json('Os parâmetros de busca não foram informados');
+        res.status(400).json('Os parâmetros de busca não foram informados corretamente');
       }
     },
 
