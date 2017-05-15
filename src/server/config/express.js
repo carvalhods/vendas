@@ -7,14 +7,14 @@ var settings = require('./settings');
 module.exports = function(){
 	var app = express();
 	app.set('port', settings.port);
-	app.use(express.static(path.join(__dirname + './../../dist')));
+	app.use(express.static(path.join(__dirname + './../../../dist')));
 
 	app.use(require('compression')());
 	app.use(bodyParser.urlencoded({extended:true}));
 	app.use(bodyParser.json());
 	app.use(require('method-override')());
 
-	load('models', {cwd: 'server'})
+	load('models', {cwd: 'src/server'})
 	.then('controllers')
 	.then('routes')
 	.into(app);
