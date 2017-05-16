@@ -1,0 +1,11 @@
+#divMain {
+	margin-left: 210px;
+}
+.menu .item {
+	font-size: 12pt !important;
+	font-weight: bold !important;
+}
+.active.item {
+	color: white !important;
+	background-color: teal !important;
+}
