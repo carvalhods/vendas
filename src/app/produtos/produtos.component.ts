@@ -15,9 +15,7 @@ export class ProdutosComponent implements OnInit {
 
   constructor(
     private produtosService: ProdutosService
-  ) {
-
-  }
+  ) {  }
 
   listaProdutos() {
     this.produtosService.listaProdutos().subscribe(
