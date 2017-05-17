@@ -1,10 +1,17 @@
-<div class="ui vertical inverted left fixed menu">
-  <a class="item" routerLink="/produtos" routerLinkActive="active">Cadastro de Produtos</a>
-  <a class="item">Lançamento de Venda</a>
-  <a class="item">Histórico de Vendas</a>
-</div>
-<div id="divMain">
-  <div class="ui basic segment">
-    <router-outlet></router-outlet>
+<div class="ui grid">
+
+  <div class="three wide column">
+    <div class="ui vertical inverted left fixed menu">
+      <a class="item" routerLink="/produtos" routerLinkActive="active">Cadastro de Produtos</a>
+      <a class="item">Lançamento de Venda</a>
+      <a class="item">Histórico de Vendas</a>
+    </div>
   </div>
+
+  <div class="thirteen wide column">
+    <div class="ui basic segment">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
 </div>
