@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosComponent } from './produtos.component';
+import { ProdutosService } from './produtos.service';
 
 @NgModule({
   imports: [
@@ -10,7 +11,10 @@ import { ProdutosComponent } from './produtos.component';
     ProdutosRoutingModule,
   ],
   declarations: [
-    ProdutosComponent
+    ProdutosComponent,
+  ],
+  providers: [
+    ProdutosService,
   ]
 })
 export class ProdutosModule { }
