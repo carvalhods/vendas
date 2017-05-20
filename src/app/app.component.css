@@ -6,7 +6,11 @@
 	color: white !important;
 	background-color: teal !important;
 }
+.ui.vertical.menu {
+	width: 130px;
+}
 .ui.basic.segment {
-	margin: 0 0 0 220px;
+	width: 88%;
+	float: right;
 	padding-top: 0;
 }

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { Produto } from './produto';
 
@@ -17,10 +18,11 @@ export class ProdutosService {
     return this.http
             .get(this.url)
             .map(res => res.json() as Produto[])
-            .catch(this.handleError);
+            .catch(this.handleError)
   }
 
-  private handleError(error: any): Observable<any> {
+  private handleError(error: any) {
     return Observable.throw(error);
   }
+
 }

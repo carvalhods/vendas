@@ -26,7 +26,7 @@ export class ProdutosGridComponent implements OnInit {
         {
           headerName: 'DESCRIÇÃO DO PRODUTO',
           field: 'descricao',
-          width: 410,
+          width: 430,
         },
         {
           headerName: 'QTDE.',
