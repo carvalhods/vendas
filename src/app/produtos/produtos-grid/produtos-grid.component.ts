@@ -22,7 +22,6 @@ export class ProdutosGridComponent implements OnInit {
           field: 'codigo',
           width: 80,
           cellStyle: this.valueCellStyle,
-          checkboxSelection: true,
         },
         {
           headerName: 'DESCRIÇÃO DO PRODUTO',
@@ -46,7 +45,7 @@ export class ProdutosGridComponent implements OnInit {
           field: 'valor',
           width: 100,
           cellStyle: this.valueCellStyle,
-          cellRenderer: this.currencyRenderer
+          cellRenderer: this.currencyRenderer,
         },
       ],
       pagination: true,
@@ -124,4 +123,10 @@ export class ProdutosGridComponent implements OnInit {
         : this.rowSelected.emit({selected: false})
   }
 
+  onPaginationChanged(event: any) {
+    if (this.gridOptions.api.getSelectedNodes().length > 0) {
+      this.gridOptions.api.deselectAll();
+      this.rowSelected.emit({selected:false});
+    }
+  }
 }
