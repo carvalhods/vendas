@@ -6,3 +6,7 @@
 	color: white !important;
 	background-color: teal !important;
 }
+.ui.basic.segment {
+	margin: 0 0 0 220px;
+	padding-top: 0;
+}

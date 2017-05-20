@@ -22,11 +22,12 @@ export class ProdutosGridComponent implements OnInit {
           field: 'codigo',
           width: 80,
           cellStyle: this.valueCellStyle,
+          checkboxSelection: true,
         },
         {
           headerName: 'DESCRIÇÃO DO PRODUTO',
           field: 'descricao',
-          width: 400,
+          width: 410,
         },
         {
           headerName: 'QTDE.',
