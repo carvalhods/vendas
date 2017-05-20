@@ -1,0 +1,9 @@
+<input (keyup)="onQuickFilterChanged($event)" type="text" id="quickFilterInput"
+        placeholder="Localizar produto" />
+
+<div style="width:100%;">
+  <ag-grid-angular #agGrid style="width:100%; height:330px;" class="ag-fresh"
+               [gridOptions]="gridOptions"
+               (selectionChanged)="onSelectionChanged($event)">
+  </ag-grid-angular>
+</div>

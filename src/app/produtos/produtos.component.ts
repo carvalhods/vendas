@@ -12,10 +12,14 @@ export class ProdutosComponent implements OnInit {
 
   private produtos: Produto[];
   private errorMessage: string;
+  private btnExcluirDisabled: boolean = true;
 
-  constructor(
-    private produtosService: ProdutosService
-  ) {  }
+  constructor(private produtosService: ProdutosService) {
+    this.listaProdutos();
+  }
+
+  ngOnInit() {
+  }
 
   listaProdutos() {
     this.produtosService.listaProdutos().subscribe(
@@ -24,8 +28,11 @@ export class ProdutosComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.listaProdutos();
+  onExcluir() {
+
   }
 
+  onRowSelected(event: any) {
+    this.btnExcluirDisabled = !event.selected;
+  }
 }

@@ -9,7 +9,7 @@ import { Produto } from './produto';
 @Injectable()
 export class ProdutosService {
 
-  private url = '/produtos';
+  private url = 'http://localhost:3000/produtos';
 
   constructor(private http: Http) { }
 

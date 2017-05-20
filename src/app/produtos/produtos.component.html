@@ -2,10 +2,23 @@
 
   <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
-  <ul>
-    <li *ngFor="let produto of produtos">
-      {{ produto.descricao }}
-    </li>
-  </ul>
+  <app-produtos-grid
+    [produtos]="produtos"
+    (rowSelected)="onRowSelected($event)"
+  >
+  </app-produtos-grid>
+
+  <br />
+
+  <a href="#" class="ui secondary button">
+    <i class="plus icon"></i>
+    Novo Produto
+  </a>
+
+  <button [disabled]="btnExcluirDisabled" class="ui negative button" (click)="onExcluir()">
+    <i class="trash icon"></i>
+    Excluir Produto
+  </button>
+
 
 </div>
