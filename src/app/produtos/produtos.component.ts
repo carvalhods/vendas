@@ -24,7 +24,7 @@ export class ProdutosComponent implements OnInit {
   listaProdutos() {
     this.produtosService.listaProdutos().subscribe(
       produtos => this.produtos = produtos,
-      error => this.status = error
+      error => this.status = Object.assign(error, {msg: 'Não foi possível obter a lista de produtos'})
     );
   }
 

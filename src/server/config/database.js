@@ -1,8 +1,12 @@
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-module.exports = function(uri){
-  mongoose.Promise = global.Promise;
-  mongoose.connect(uri);
+module.exports = function(uri) {
+
+  mongoose.connect(uri)
+  .catch(function(err) {
+    console.log(err);
+  });
 
 	mongoose.connection.on('connected', function(){
 		console.log('Mongoose conectado');
