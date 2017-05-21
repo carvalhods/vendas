@@ -11,9 +11,8 @@ import { Produto } from './produto';
 export class ProdutosComponent implements OnInit {
 
   private produtos: Produto[];
-  private errorMessage: string;
-  private btnExcluirDisabled: boolean = true;
-  private btnAlterarDisabled: boolean = true;
+  private status: any = {msg: null, erros: []};
+  private btnDisabled: boolean = true;
 
   constructor(private produtosService: ProdutosService) {
     this.listaProdutos();
@@ -25,7 +24,7 @@ export class ProdutosComponent implements OnInit {
   listaProdutos() {
     this.produtosService.listaProdutos().subscribe(
       produtos => this.produtos = produtos,
-      error => this.errorMessage = <any>error
+      error => this.status = error
     );
   }
 
@@ -34,7 +33,6 @@ export class ProdutosComponent implements OnInit {
   }
 
   onRowSelected(event: any) {
-    this.btnExcluirDisabled = !event.selected;
-    this.btnAlterarDisabled = !event.selected;
+    this.btnDisabled = !event.selected;
   }
 }
