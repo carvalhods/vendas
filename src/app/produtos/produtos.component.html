@@ -29,15 +29,16 @@
   </app-produtos-grid>
 
   <br />
-  <a href="#" class="ui secondary button">
+  <a class="ui secondary button" [routerLink]="['/produtos', 'novo']">
     <i class="plus icon"></i>
     Novo Produto
   </a>
 
-  <a href="#" class="ui secondary button"
-          [class.disabled]="btnDisabled" >
-    <i class="edit icon"></i>
-    Alterar Produto
+  <a class="ui secondary button"
+    [class.disabled]="btnDisabled"
+    [routerLink]="(activeItem) ? activeItem._id : 0" >
+      <i class="edit icon"></i>
+      Alterar Produto
   </a>
 
   <button class="ui negative button" style="float:right"

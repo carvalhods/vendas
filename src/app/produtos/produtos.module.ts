@@ -6,6 +6,7 @@ import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosService } from './produtos.service';
 import { ProdutosComponent } from './produtos.component';
 import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
+import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
   declarations: [
     ProdutosComponent,
     ProdutosGridComponent,
+    ProdutoDetalheComponent,
   ],
   providers: [
     ProdutosService,

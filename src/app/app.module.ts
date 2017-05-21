@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProdutosModule } from './produtos/produtos.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { ProdutosModule } from './produtos/produtos.module';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    ProdutosModule,
   ],
   providers: [
     {
