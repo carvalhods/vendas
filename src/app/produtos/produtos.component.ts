@@ -13,6 +13,7 @@ export class ProdutosComponent implements OnInit {
   private produtos: Produto[];
   private errorMessage: string;
   private btnExcluirDisabled: boolean = true;
+  private btnAlterarDisabled: boolean = true;
 
   constructor(private produtosService: ProdutosService) {
     this.listaProdutos();
@@ -34,5 +35,6 @@ export class ProdutosComponent implements OnInit {
 
   onRowSelected(event: any) {
     this.btnExcluirDisabled = !event.selected;
+    this.btnAlterarDisabled = !event.selected;
   }
 }

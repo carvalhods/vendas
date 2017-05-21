@@ -1,4 +1,5 @@
 <div>
+
   <h2 class="ui dividing header">Cadastro de Produtos</h2>
 
   <app-produtos-grid
@@ -13,9 +14,16 @@
     Novo Produto
   </a>
 
+  <a href="#" class="ui secondary button"
+          [class.disabled]="btnAlterarDisabled" >
+    <i class="edit icon"></i>
+    Alterar Produto
+  </a>
+
   <button class="ui negative button" style="float:right"
-          [disabled]="btnExcluirDisabled" (click)="onExcluir()" >
+          [class.disabled]="btnExcluirDisabled" (click)="onExcluir()" >
     <i class="trash icon"></i>
     Excluir Produto
   </button>
+
 </div>
