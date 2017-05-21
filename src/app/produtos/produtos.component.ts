@@ -12,7 +12,10 @@ export class ProdutosComponent implements OnInit {
 
   private produtos: Produto[];
   private status: any = {msg: null, erros: []};
-  private btnDisabled: boolean = true;
+  private activeItem: any;
+  private btnDisabled = true;
+  private btnExcluirPressed = false;
+  private loading = false;
 
   constructor(private produtosService: ProdutosService) {
     this.listaProdutos();
@@ -28,11 +31,34 @@ export class ProdutosComponent implements OnInit {
     );
   }
 
-  onExcluir() {
-
-  }
-
   onRowSelected(event: any) {
     this.btnDisabled = !event.selected;
+    this.activeItem = (event.selected) ? event.produto : null;
+    this.btnExcluirPressed = false;
   }
+
+  onExcluir() {
+    if (this.activeItem) {
+      this.btnExcluirPressed = true;
+    }
+  }
+
+  onExcluirConfirm() {
+    this.loading = true;
+    this.produtosService.deleteProduto(this.activeItem._id).subscribe(
+      () => {
+                this.produtos = this.produtos.filter(
+                  produto => produto._id !== this.activeItem._id
+                );
+                this.loading = false;
+                this.btnExcluirPressed = false;
+            },
+      error => {
+              this.status = Object.assign(error, {msg: 'Não foi possível excluir o produto'});
+              this.btnExcluirPressed = false;
+            }
+    );
+
+  }
+
 }

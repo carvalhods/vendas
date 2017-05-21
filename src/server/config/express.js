@@ -15,7 +15,8 @@ module.exports = function(){
 	app.use(require('method-override')());
 
 	app.use(function(req, res, next) {
-		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.setHeader('Access-Control-Allow-Origin', '*');
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
 		next();
 	});
 

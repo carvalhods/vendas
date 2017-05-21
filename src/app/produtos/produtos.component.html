@@ -9,6 +9,20 @@
     </ul>
   </div>
 
+  <div class="ui warning message" [hidden]="!btnExcluirPressed" [class.icon]="loading">
+    <div class="content">
+      <div class="ui header">
+        Deseja realmente excluir este produto? Esta operação não poderá ser desfeita
+      </div>
+      <ul class="list">
+        <li>{{ activeItem?.codigo }} - {{ activeItem?.descricao }}</li>
+      </ul>
+      <button class="ui teal button" (click)="btnExcluirPressed = false">Não</button>
+      <button class="ui grey button" (click)="onExcluirConfirm()">Sim</button>
+    </div>
+    <i class="notched icon" [ngClass]="{'circle': loading, 'loading': loading}"></i>
+  </div>
+
   <app-produtos-grid
     [produtos]="produtos"
     (rowSelected)="onRowSelected($event)" >

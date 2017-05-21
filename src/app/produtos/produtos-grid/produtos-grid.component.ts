@@ -8,7 +8,7 @@ import { Produto } from '../produto';
   templateUrl: './produtos-grid.component.html',
   styleUrls: ['./produtos-grid.component.css']
 })
-export class ProdutosGridComponent implements OnInit {
+export class ProdutosGridComponent implements OnInit, OnChanges {
 
   private gridOptions: GridOptions;
   @Input() produtos: Produto[];
@@ -77,8 +77,9 @@ export class ProdutosGridComponent implements OnInit {
 
   fillTable() {
     if (this.produtos) {
-      for (let produto of this.produtos) {
-        let row = {status:'', qtde:'', estoqueMin:''};
+      this.gridOptions.api.setRowData([]);
+      for (const produto of this.produtos) {
+        let row = {status: '', qtde: '', estoqueMin: ''};
         Object.assign(row, produto);
         row.status = (produto.qtde < produto.estoqueMin) ? ' (Baixo)' : '';
         row.qtde = produto.qtde.toLocaleString('pt-BR') + ' ' + produto.unidade;
@@ -93,9 +94,9 @@ export class ProdutosGridComponent implements OnInit {
       case 'codigo':
       case 'qtde':
       case 'estoqueMin':
-        return {'text-align': 'center'}
+        return {'text-align': 'center'};
       case 'valor':
-        return {'text-align': 'right'}
+        return {'text-align': 'right'};
     }
   }
 
@@ -108,7 +109,7 @@ export class ProdutosGridComponent implements OnInit {
   currencyRenderer(params) {
     return (params.value)
     ? 'R$ ' + params.value.toLocaleString('pt-BR', {minimumFractionDigits: 2})
-    : null
+    : null;
   }
 
   onQuickFilterChanged(event: any) {
@@ -117,16 +118,16 @@ export class ProdutosGridComponent implements OnInit {
   }
 
   onSelectionChanged(event: any) {
-      var nodes = this.gridOptions.api.getSelectedNodes();
+      const nodes = this.gridOptions.api.getSelectedNodes();
       (nodes.length > 0)
         ? this.rowSelected.emit({selected: true, produto: nodes[0].data})
-        : this.rowSelected.emit({selected: false})
+        : this.rowSelected.emit({selected: false});
   }
 
   onPaginationChanged(event: any) {
     if (this.gridOptions.api.getSelectedNodes().length > 0) {
       this.gridOptions.api.deselectAll();
-      this.rowSelected.emit({selected:false});
+      this.rowSelected.emit({selected: false});
     }
   }
 }
