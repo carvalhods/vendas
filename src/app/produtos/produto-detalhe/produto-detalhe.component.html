@@ -9,18 +9,19 @@
     </ul>
   </div>
 
-  <form class="ui form">
+  <form class="ui form" [formGroup]="produtoForm">
 
     <div class="fields">
 
       <div class="two wide field">
         <label>CÓDIGO</label>
-        <input type="text" disabled />
+        <input type="text" formControlName="codigo"/>
       </div>
 
       <div class="fourteen wide field">
         <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
-        <input type="text" id="descricao" maxlength="100" autocomplete="off" />
+        <input type="text" id="descricao" formControlName="descricao"
+                maxlength="100" autocomplete="off" />
       </div>
 
     </div>
@@ -29,13 +30,13 @@
 
       <div class="two wide field">
         <label for="qtde">QTDE.</label>
-        <input type="number" id="qtde" min="0" max=""/>
+        <input type="number" id="qtde" formControlName="qtde" min="0" max=""/>
       </div>
 
       <div class="field">
         <label for="unid">UNIDADE</label>
         <div class="ui selection search dropdown" sm-dropdown id="selectUnid">
-          <input type="hidden" name="unidade"/>
+          <input type="hidden" name="unidade" formControlName="unidade"/>
           <i class="dropdown icon"></i>
           <div class="default text"></div>
           <div class="menu">
@@ -53,12 +54,13 @@
 
       <div class="three wide field">
         <label for="estoqueMin">ESTOQUE MÍNIMO</label>
-        <input type="number" id="estoqueMin" min="0" max="" />
+        <input type="number" id="estoqueMin" formControlName="estoqueMin" min="0" max="" />
       </div>
 
       <div class="field">
         <label for="valorUnit">VALOR UNITÁRIO</label>
-        <input type="text" id="valorUnit" autocomplete="off" currencyMask />
+        <input type="text" id="valorUnit" currencyMask
+                formControlName="valor" autocomplete="off"  />
       </div>
 
     </div>

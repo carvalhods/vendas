@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular/main';
 
 import { ProdutosRoutingModule } from './produtos-routing.module';
@@ -14,6 +15,7 @@ import { CurrencyMaskDirective } from '../shared/currency-mask.directive';
   imports: [
     CommonModule,
     ProdutosRoutingModule,
+    ReactiveFormsModule,
     AgGridModule.withComponents([]),
   ],
   declarations: [

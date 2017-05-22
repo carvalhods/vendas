@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
+import { Produto } from '../produto';
 
 @Component({
   selector: 'app-produto-detalhe',
@@ -7,12 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutoDetalheComponent implements OnInit {
 
+  private produtoForm: FormGroup;
   private status: any = {msg: null, erros: []};
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit() {
   }
 
+  createForm() {
+    this.produtoForm = this.formBuilder.group(
+      {
+        codigo: new FormControl({value: null, disabled:true}),
+        descricao: null,
+        qtde: null,
+        unidade: 'UN',
+        estoqueMin: null,
+        valor: 1000.99
+      }
+    );
+  }
 
 }
