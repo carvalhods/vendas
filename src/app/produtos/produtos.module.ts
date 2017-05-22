@@ -7,6 +7,7 @@ import { ProdutosService } from './produtos.service';
 import { ProdutosComponent } from './produtos.component';
 import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
+import { SmDropdownDirective } from '../shared/sm-dropdown.directive';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.compo
     ProdutosComponent,
     ProdutosGridComponent,
     ProdutoDetalheComponent,
+    SmDropdownDirective,
   ],
   providers: [
     ProdutosService,

@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutoDetalheComponent implements OnInit {
 
+  private status: any = {msg: null, erros: []};
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }
