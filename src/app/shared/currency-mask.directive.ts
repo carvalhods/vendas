@@ -1,9 +1,9 @@
 import { Directive, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[sm-dropdown]'
+  selector: '[currencyMask]'
 })
-export class SmDropdownDirective {
+export class CurrencyMaskDirective {
 
   constructor(
     private renderer2: Renderer2
@@ -12,7 +12,13 @@ export class SmDropdownDirective {
     script.type = 'text/javascript';
     script.text = `
       $(document).ready(function(){
-        $('.ui.dropdown').dropdown();
+        $("input[currencyMask]").maskMoney({
+          prefix: 'R$ ',
+          decimal: ',',
+          thousands: '.',
+          allowNegative: false,
+          affixesStay: true
+        });
       });
     `;
     this.renderer2.appendChild(document.body, script);

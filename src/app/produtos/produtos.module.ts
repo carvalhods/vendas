@@ -8,18 +8,20 @@ import { ProdutosComponent } from './produtos.component';
 import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 import { SmDropdownDirective } from '../shared/sm-dropdown.directive';
+import { CurrencyMaskDirective } from '../shared/currency-mask.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     ProdutosRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
   ],
   declarations: [
     ProdutosComponent,
     ProdutosGridComponent,
     ProdutoDetalheComponent,
     SmDropdownDirective,
+    CurrencyMaskDirective,
   ],
   providers: [
     ProdutosService,
