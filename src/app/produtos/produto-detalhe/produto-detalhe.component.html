@@ -9,7 +9,7 @@
     </ul>
   </div>
 
-  <form class="ui form" [formGroup]="produtoForm">
+  <form class="ui form" [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
 
     <div class="fields">
 
@@ -59,14 +59,14 @@
 
       <div class="field">
         <label for="valorUnit">VALOR UNITÁRIO</label>
-        <input-money id="teste" _id="valorUnit" formControlName="valor" ngDefaultControl></input-money>
+        <input-money _id="valorUnit" formControlName="valor" ngDefaultControl></input-money>
       </div>
 
     </div>
 
   </form>
 
-  <button class="ui teal button">Salvar</button>
+  <button class="ui teal button" (click)="onSubmit()">Salvar</button>
   <a routerLink="/produtos" class="ui grey button">Voltar</a>
 
 </div>

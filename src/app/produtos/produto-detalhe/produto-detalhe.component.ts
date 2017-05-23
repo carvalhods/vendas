@@ -28,9 +28,27 @@ export class ProdutoDetalheComponent implements OnInit {
         qtde: null,
         unidade: 'UN',
         estoqueMin: null,
-        valor: 1000.99
+        valor: null
       }
     );
+  }
+
+  onSubmit() {
+    console.log(this.prepareSave());
+  }
+
+  prepareSave(): Produto {
+    const formModel = this.produtoForm.value;
+    const produto: Produto = {
+      _id: null,
+      codigo: formModel.codigo,
+      descricao: formModel.descricao,
+      qtde: formModel.qtde,
+      unidade: formModel.unidade,
+      estoqueMin: formModel.estoqueMin,
+      valor: formModel.valor
+    };
+    return produto;
   }
 
 }

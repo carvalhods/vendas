@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges,
-          Input, Renderer2, ElementRef } from '@angular/core';
+          Input, Renderer2, ElementRef, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'input-money',
@@ -8,17 +9,27 @@ import { Component, OnInit, OnChanges,
               #txtMoney
               type="text"
               [id]="id"
-              [value]="value"
+              [value]="valor"
               autocomplete="off"
+              (blur)="onChangeValue(txtMoney.value)"
             />
   `,
-  styleUrls: ['./input-money.component.css']
+  styleUrls: ['./input-money.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputMoneyComponent),
+      multi: true
+    }
+  ]
 })
 
-export class InputMoneyComponent implements OnInit, OnChanges {
+export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAccessor {
 
-  @Input() value: any;
+  @Input() value: number;
   @Input('_id') id: string;
+  propagateChange = (_: any) => {};
+  valor: number;
 
   constructor(
     private renderer2: Renderer2,
@@ -37,17 +48,12 @@ export class InputMoneyComponent implements OnInit, OnChanges {
           allowNegative: false,
           affixesStay: true
         });
-        $("#${this.id}").change(function(){
-          var valorChanged = $("#${this.id}").maskMoney('unmasked')[0];
-          $("#${this.id}").closest('input-money').val(valorChanged);
-        })
       });
     `;
     this.renderer2.appendChild(document.body, script);
   }
 
   ngOnChanges() {
-    this.value = this.elementRef.nativeElement.value;
     let script = this.renderer2.createElement('script');
     script.text = `
       setTimeout(function(){
@@ -57,4 +63,27 @@ export class InputMoneyComponent implements OnInit, OnChanges {
     this.renderer2.appendChild(document.body, script);
   }
 
+  writeValue(value: any) {
+    if (value !== undefined) {
+      this.value = value;
+      this.valor = this.value;
+    }
+  }
+
+  registerOnChange(fn) {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched() {
+  }
+
+  onChangeValue(value) {
+    let script = this.renderer2.createElement('script');
+    script.text = `
+      var valorChanged = $("#${this.id}").maskMoney('unmasked')[0];
+    `;
+    this.renderer2.appendChild(document.body, script);
+    this.value = window['valorChanged'];
+    this.propagateChange(this.value);
+  }
 }
