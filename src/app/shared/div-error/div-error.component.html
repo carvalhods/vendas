@@ -1,0 +1,6 @@
+<div class="ui error message" [hidden]="!status.erros.length">
+  <div class="ui header">{{ status.msg }}</div>
+  <ul class="list">
+    <li *ngFor="let erro of status.erros">{{ erro }}</li>
+  </ul>
+</div>
