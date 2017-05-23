@@ -1,0 +1,11 @@
+<div class="ui selection search dropdown">
+  <input type="hidden"
+    #inputHidden [name]="id" [value]="value" (change)="onChangeValue(inputHidden.value)"/>
+  <i class="dropdown icon"></i>
+  <div class="default text"></div>
+  <div class="menu">
+    <div class="item" *ngFor="let option of options" [attr.data-value]="option">
+        {{ option }}
+    </div>
+  </div>
+</div>

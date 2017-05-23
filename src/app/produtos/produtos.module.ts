@@ -8,7 +8,7 @@ import { ProdutosService } from './produtos.service';
 import { ProdutosComponent } from './produtos.component';
 import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
-import { SmDropdownDirective } from '../shared/sm-dropdown.directive';
+import { SmSelectComponent } from '../shared/sm-select/sm-select.component';
 import { InputMoneyComponent } from '../shared/input-money/input-money.component';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { InputMoneyComponent } from '../shared/input-money/input-money.component
     ProdutosComponent,
     ProdutosGridComponent,
     ProdutoDetalheComponent,
-    SmDropdownDirective,
+    SmSelectComponent,
     InputMoneyComponent,
   ],
   providers: [

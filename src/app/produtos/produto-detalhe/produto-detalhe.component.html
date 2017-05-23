@@ -35,21 +35,12 @@
 
       <div class="field">
         <label for="unid">UNIDADE</label>
-        <div class="ui selection search dropdown" sm-dropdown id="selectUnid">
-          <input type="hidden" name="unidade" formControlName="unidade"/>
-          <i class="dropdown icon"></i>
-          <div class="default text"></div>
-          <div class="menu">
-            <div class="item" data-value="UN">UN</div>
-            <div class="item" data-value="PÇ">PÇ</div>
-            <div class="item" data-value="CX">CX</div>
-            <div class="item" data-value="KG">KG</div>
-            <div class="item" data-value="M">M</div>
-            <div class="item" data-value="M²">M²</div>
-            <div class="item" data-value="M³">M³</div>
-            <div class="item" data-value="L">L</div>
-          </div>
-        </div>
+        <sm-select
+          _id="unid"
+          [options]="['UN','PÇ','CX','KG','M','M²','M³','L']"
+          formControlName="unidade"          
+        >
+        </sm-select>
       </div>
 
       <div class="three wide field">
