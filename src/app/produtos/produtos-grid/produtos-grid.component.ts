@@ -79,7 +79,7 @@ export class ProdutosGridComponent implements OnInit, OnChanges {
     if (this.produtos) {
       this.gridOptions.api.setRowData([]);
       for (const produto of this.produtos) {
-        let row = {status: '', qtde: '', estoqueMin: ''};
+        const row = {status: '', qtde: '', estoqueMin: ''};
         Object.assign(row, produto);
         row.status = (produto.qtde < produto.estoqueMin) ? ' (Baixo)' : '';
         row.qtde = produto.qtde.toLocaleString('pt-BR') + ' ' + produto.unidade;

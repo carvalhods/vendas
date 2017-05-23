@@ -17,7 +17,7 @@ export class SmSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() value: string;
   @Input() options: string[];
-  @Input('_id') id: string;
+  @Input() id: string;
   propagateChange = (_: any) => {};
 
   constructor(
@@ -25,7 +25,7 @@ export class SmSelectComponent implements OnInit, ControlValueAccessor {
   ) { }
 
   ngOnInit() {
-    let script = this.renderer2.createElement('script');
+    const script = this.renderer2.createElement('script');
     script.text = `
       $(document).ready(function(){
         $('.ui.dropdown').dropdown();

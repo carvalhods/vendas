@@ -23,7 +23,7 @@ export class ProdutoDetalheComponent implements OnInit {
   createForm() {
     this.produtoForm = this.formBuilder.group(
       {
-        codigo: new FormControl({value: null, disabled:true}),
+        codigo: new FormControl({value: null, disabled: true}),
         descricao: null,
         qtde: null,
         unidade: 'UN',
@@ -39,15 +39,12 @@ export class ProdutoDetalheComponent implements OnInit {
 
   prepareSave(): Produto {
     const formModel = this.produtoForm.value;
-    const produto: Produto = {
-      _id: null,
-      codigo: formModel.codigo,
-      descricao: formModel.descricao,
-      qtde: formModel.qtde,
-      unidade: formModel.unidade,
-      estoqueMin: formModel.estoqueMin,
-      valor: formModel.valor
-    };
+    const produto = new Produto();
+
+    for (const campo in formModel) {
+      produto[campo] = formModel[campo];
+    }
+
     return produto;
   }
 

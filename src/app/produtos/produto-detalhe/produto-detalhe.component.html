@@ -31,10 +31,9 @@
       <div class="field">
         <label for="unid">UNIDADE</label>
         <sm-select
-          _id="unid"
+          id="unid"
           [options]="['UN','PÇ','CX','KG','M','M²','M³','L']"
-          formControlName="unidade"
-        >
+          formControlName="unidade">
         </sm-select>
       </div>
 
@@ -45,14 +44,14 @@
 
       <div class="field">
         <label for="valorUnit">VALOR UNITÁRIO</label>
-        <input-money _id="valorUnit" formControlName="valor" ngDefaultControl></input-money>
+        <input-money id="valorUnit" formControlName="valor" ngDefaultControl></input-money>
       </div>
 
     </div>
 
   </form>
 
-  <button class="ui teal button" (click)="onSubmit()">Salvar</button>
+  <button class="ui teal button" (click)="onSubmit()" [disabled]="produtoForm.pristine">Salvar</button>
   <a routerLink="/produtos" class="ui grey button">Voltar</a>
 
 </div>

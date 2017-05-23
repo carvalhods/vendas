@@ -8,8 +8,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             <input
               #txtMoney
               type="text"
-              [id]="id"
-              [value]="valor"
+              [id]="id + 'Child'"
+              [value]="valueChild"
               autocomplete="off"
               (blur)="onChangeValue(txtMoney.value)"
             />
@@ -27,9 +27,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAccessor {
 
   @Input() value: number;
-  @Input('_id') id: string;
+  @Input() id: string;
+  valueChild: number;
   propagateChange = (_: any) => {};
-  valor: number;
+
 
   constructor(
     private renderer2: Renderer2,
@@ -38,10 +39,10 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   ngOnInit() {
-    let script = this.renderer2.createElement('script');
+    const script = this.renderer2.createElement('script');
     script.text = `
       $(document).ready(function(){
-        $("#${this.id}").maskMoney({
+        $("#${this.id}Child").maskMoney({
           prefix: 'R$ ',
           decimal: ',',
           thousands: '.',
@@ -54,10 +55,10 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   ngOnChanges() {
-    let script = this.renderer2.createElement('script');
+    const script = this.renderer2.createElement('script');
     script.text = `
       setTimeout(function(){
-        $("#${this.id}").maskMoney('mask');
+        $("#${this.id}Child").maskMoney('mask');
       }, 20);
     `;
     this.renderer2.appendChild(document.body, script);
@@ -66,7 +67,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
-      this.valor = this.value;
+      this.valueChild = this.value;
     }
   }
 
@@ -78,9 +79,9 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   onChangeValue(value) {
-    let script = this.renderer2.createElement('script');
+    const script = this.renderer2.createElement('script');
     script.text = `
-      var valorChanged = $("#${this.id}").maskMoney('unmasked')[0];
+      var valorChanged = $("#${this.id}Child").maskMoney('unmasked')[0];
     `;
     this.renderer2.appendChild(document.body, script);
     this.value = window['valorChanged'];

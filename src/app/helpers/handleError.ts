@@ -5,7 +5,7 @@ export class HandleError {
 
   handle(error: any) {
     console.log(error);
-    let status = {msg: null, erros: []};
+    const status = {msg: null, erros: []};
     if (error.data) {
       if (error.data.errors) {
         for (const attr in error.data.errors) {

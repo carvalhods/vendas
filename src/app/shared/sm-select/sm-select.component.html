@@ -1,6 +1,6 @@
 <div class="ui selection search dropdown">
   <input type="hidden"
-    #inputHidden [name]="id" [value]="value" (change)="onChangeValue(inputHidden.value)"/>
+    #inputHidden [name]="id + 'Child'" [value]="value" (change)="onChangeValue(inputHidden.value)"/>
   <i class="dropdown icon"></i>
   <div class="default text"></div>
   <div class="menu">
