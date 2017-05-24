@@ -26,6 +26,13 @@ export class ProdutosService {
             .catch(this.handleError);
   }
 
+  getProduto(id: any): Observable<Produto> {
+    return this.http
+            .get(`${this.url}/${id}`)
+            .map(res => res.json() as Produto)
+            .catch(this.handleError);
+  }
+
   deleteProduto(id: any): Observable<void> {
     const url = `${this.url}/${id}`;
     return this.http

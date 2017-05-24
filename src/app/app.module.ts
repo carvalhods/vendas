@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
   providers: [
     {
       provide: LOCALE_ID,
-      useValue: 'pt_BR'
+      useValue: 'pt-BR'
     }
   ],
   bootstrap: [AppComponent]
