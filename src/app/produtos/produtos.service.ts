@@ -11,7 +11,7 @@ import { HandleError } from '../helpers/handleError';
 export class ProdutosService {
 
   private url = 'http://localhost:3000/produtos';
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({'Content-Type':'application/json'});
   private requestOptions = new RequestOptions({headers: this.headers});
   private handleError = new HandleError().handle;
 
@@ -29,6 +29,13 @@ export class ProdutosService {
   getProduto(id: any): Observable<Produto> {
     return this.http
             .get(`${this.url}/${id}`)
+            .map(res => res.json() as Produto)
+            .catch(this.handleError);
+  }
+
+  insertProduto(produto: Produto): Observable<Produto> {
+    return this.http
+            .post(this.url, this.requestOptions)
             .map(res => res.json() as Produto)
             .catch(this.handleError);
   }

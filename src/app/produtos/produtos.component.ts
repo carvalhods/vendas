@@ -11,7 +11,7 @@ import { Produto } from './produto';
 export class ProdutosComponent implements OnInit {
 
   private produtos: Produto[];
-  private status: any = {msg: null, erros: []};
+  private status: any = {saved: false, msg: null, erros: []};
   private activeItem: any;
   private btnDisabled = true;
   private btnExcluirPressed = false;

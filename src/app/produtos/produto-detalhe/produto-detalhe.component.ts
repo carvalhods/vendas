@@ -13,7 +13,7 @@ import { ProdutosService } from '../produtos.service';
 export class ProdutoDetalheComponent implements OnInit {
 
   private produtoForm: FormGroup;
-  private status: any = {msg: null, erros: []};
+  private status: any = {saved: false, msg: null, erros: []};
   private id: string;
 
   constructor(

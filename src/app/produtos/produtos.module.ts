@@ -10,7 +10,7 @@ import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 import { SmSelectComponent } from '../shared/sm-select/sm-select.component';
 import { InputMoneyComponent } from '../shared/input-money/input-money.component';
-import { DivErrorComponent } from '../shared/div-error/div-error.component';
+import { DivMessageComponent } from '../shared/div-message/div-message.component';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { DivErrorComponent } from '../shared/div-error/div-error.component';
     ProdutoDetalheComponent,
     SmSelectComponent,
     InputMoneyComponent,
-    DivErrorComponent,
+    DivMessageComponent,
   ],
   providers: [
     ProdutosService,

@@ -64,6 +64,7 @@ module.exports = function(app){
         updateProduto: function(req, res){
             var _id = req.body._id;
             if (req.body.codigo) { delete req.body.codigo }
+            delete req.body._id;
             if (_id) {
                 Produto.findOne({_id: _id}).exec()
                 .then(
