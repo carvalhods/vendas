@@ -1,4 +1,4 @@
-<div class="ui selection search dropdown">
+<div class="ui selection search dropdown" [id]="id + 'ChildDiv'">
   <input type="hidden"
     #inputHidden [name]="id + 'Child'" [value]="value" (change)="onChangeValue(inputHidden.value)"/>
   <i class="dropdown icon"></i>

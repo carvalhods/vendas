@@ -1,18 +1,20 @@
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 
 export class HandleError {
 
-  handle(error: any) {
+  handle(error: Response | any) {
     console.log(error);
     const status = {msg: null, erros: []};
-    if (error.data) {
-      if (error.data.errors) {
-        for (const attr in error.data.errors) {
-          status.erros.push(error.data.errors[attr].message);
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      if (body.errors) {
+        for (const attr in body.errors) {
+          status.erros.push(body.errors[attr].message);
         }
       } else {
-        status.erros.push(error.data.message || error.data);
+        status.erros.push(body.message || body);
       }
     } else {
       status.erros.push('Falha na conexão com o servidor');

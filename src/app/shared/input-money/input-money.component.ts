@@ -68,6 +68,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
     if (value !== undefined) {
       this.value = value;
       this.valueChild = this.value;
+      this.ngOnChanges();
     }
   }
 
@@ -84,7 +85,9 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
       var valorChanged = $("#${this.id}Child").maskMoney('unmasked')[0];
     `;
     this.renderer2.appendChild(document.body, script);
-    this.value = window['valorChanged'];
-    this.propagateChange(this.value);
+    if (this.value != window['valorChanged']) {
+      this.value = window['valorChanged'];
+      this.propagateChange(this.value);
+    }
   }
 }

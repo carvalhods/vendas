@@ -30,7 +30,7 @@ export class ProdutoDetalheComponent implements OnInit {
         this.id = params['id'];
         this.getProduto();
       }
-    )
+    );
   }
 
   createForm() {
@@ -52,6 +52,8 @@ export class ProdutoDetalheComponent implements OnInit {
       produto => {
         this.produtoForm.get('_id').setValue(produto._id);
         this.produtoForm.get('codigo').setValue(produto.codigo);
+        this.produtoForm.get('unidade').setValue(produto.unidade);
+        this.produtoForm.get('valor').setValue(0);
         if (this.id !== 'novo') {
           this.produtoForm.setValue({
             _id: produto._id,
@@ -64,21 +66,35 @@ export class ProdutoDetalheComponent implements OnInit {
           });
         }
       },
-      error => this.status = Object.assign(error, {msg: 'Não foi possível obter os dados do produto'})
+      error => this.status = Object.assign(error, {saved: false, msg: 'Não foi possível obter os dados do produto'})
     );
   }
 
-  onSubmit() {
-    console.log(this.prepareSave());
-  }
-
-  prepareSave(): Produto {
+  prepareSave() {
     const formModel = this.produtoForm.value;
     const produto = new Produto();
     for (const campo in formModel) {
       produto[campo] = formModel[campo];
     }
     return produto;
+  }
+
+  onSubmit() {
+    const produto = this.prepareSave();
+    if (this.id == 'novo') {
+      this.produtosService.insertProduto(produto).subscribe(
+        produto => {
+          this.status = Object.assign({saved: true, msg: 'Produto salvo com sucesso', erros: []});
+          this.produtoForm.reset();
+          this.getProduto();
+        },
+        error => this.status = Object.assign(error, {saved: false, msg: 'Não foi possível salvar os dados do produto'})
+      );
+    }
+  }
+
+  onChange() {
+    this.status = {saved: false, msg: null, erros: []};
   }
 
 }

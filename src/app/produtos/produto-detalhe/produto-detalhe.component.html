@@ -4,7 +4,10 @@
 
   <div-message [status]="status"></div-message>
 
-  <form class="ui form" [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+  <form class="ui form"
+        [formGroup]="produtoForm"
+        (ngSubmit)="onSubmit()"
+        (change)="onChange()">
 
     <div class="fields">
 
