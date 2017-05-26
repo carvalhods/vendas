@@ -40,7 +40,7 @@ export class ProdutoDetalheComponent implements OnInit {
         codigo: new FormControl({value: null, disabled: true}),
         descricao: null,
         qtde: null,
-        unidade: 'UN',
+        unidade: null,
         estoqueMin: null,
         valor: null
       }
@@ -80,15 +80,26 @@ export class ProdutoDetalheComponent implements OnInit {
   }
 
   onSubmit() {
-    const produto = this.prepareSave();
-    if (this.id == 'novo') {
-      this.produtosService.insertProduto(produto).subscribe(
+    const dados = this.prepareSave();
+    if (this.id === 'novo') {
+      this.produtosService.insertProduto(dados).subscribe(
         produto => {
           this.status = Object.assign({saved: true, msg: 'Produto salvo com sucesso', erros: []});
           this.produtoForm.reset();
           this.getProduto();
         },
         error => this.status = Object.assign(error, {saved: false, msg: 'Não foi possível salvar os dados do produto'})
+      );
+    } else {
+      this.produtosService.updateProduto(dados).subscribe(
+        () => {
+          this.status = Object.assign({saved: true, msg: 'Produto salvo com sucesso', erros: []});
+          this.produtoForm.markAsPristine();
+        },
+        error => {
+          console.log(error);
+          this.status = Object.assign(error, {saved: false, msg: 'Não foi possível salvar os dados do produto'});
+        }
       );
     }
   }

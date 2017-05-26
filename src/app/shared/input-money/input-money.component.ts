@@ -9,7 +9,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
               #txtMoney
               type="text"
               [id]="id + 'Child'"
-              [value]="valueChild"
               autocomplete="off"
               (blur)="onChangeValue(txtMoney.value)"
             />
@@ -58,8 +57,8 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
     const script = this.renderer2.createElement('script');
     script.text = `
       setTimeout(function(){
-        $("#${this.id}Child").maskMoney('mask');
-      }, 20);
+        $("#${this.id}Child").maskMoney('mask', ${this.value});
+      }, 10);
     `;
     this.renderer2.appendChild(document.body, script);
   }
@@ -67,7 +66,6 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
-      this.valueChild = this.value;
       this.ngOnChanges();
     }
   }
@@ -85,7 +83,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
       var valorChanged = $("#${this.id}Child").maskMoney('unmasked')[0];
     `;
     this.renderer2.appendChild(document.body, script);
-    if (this.value != window['valorChanged']) {
+    if (this.value !== window['valorChanged']) {
       this.value = window['valorChanged'];
       this.propagateChange(this.value);
     }

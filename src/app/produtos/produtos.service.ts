@@ -40,6 +40,13 @@ export class ProdutosService {
             .catch(this.handleError);
   }
 
+  updateProduto(produto: Produto): Observable<void> {
+    return this.http
+            .put(this.url, JSON.stringify(produto), this.requestOptions)
+            .map(() => null)
+            .catch(this.handleError);
+  }
+
   deleteProduto(id: any): Observable<void> {
     const url = `${this.url}/${id}`;
     return this.http

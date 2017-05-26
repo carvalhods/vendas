@@ -8,13 +8,17 @@ export class HandleError {
     console.log(error);
     const status = {msg: null, erros: []};
     if (error instanceof Response) {
-      const body = error.json() || '';
-      if (body.errors) {
-        for (const attr in body.errors) {
-          status.erros.push(body.errors[attr].message);
+      try {
+        const body = error.json() || '';
+        if (body.errors) {
+          for (const attr in body.errors) {
+            status.erros.push(body.errors[attr].message);
+          }
+        } else {
+          status.erros.push(body.message || body);
         }
-      } else {
-        status.erros.push(body.message || body);
+      } catch (err) {
+        status.erros.push('Falha na conexão com o servidor');
       }
     } else {
       status.erros.push('Falha na conexão com o servidor');
