@@ -1,11 +1,16 @@
-#divMain {
-	margin-left: 210px;
-}
-.menu .item {
+.item {
 	font-size: 12pt !important;
 	font-weight: bold !important;
 }
 .active.item {
 	color: white !important;
 	background-color: teal !important;
+}
+.ui.vertical.menu {
+	width: 130px;
+}
+.ui.basic.segment {
+	width: 88%;
+	float: right;
+	padding-top: 0;
 }

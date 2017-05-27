@@ -48,12 +48,10 @@ module.exports = function(app){
         },
 
         insertProduto: function(req, res){
-            var produto = req.body;
-            if (produto.codigo) { delete produto.codigo }
-            Produto.create(produto)
+            Produto.create(req.body)
             .then(
                 function(produto){
-                    res.status(200).json(produto);
+                    res.status(201).json(produto);
                 },
                 function(erro){
                     res.status(500).json(erro);
@@ -63,15 +61,16 @@ module.exports = function(app){
 
         updateProduto: function(req, res){
             var _id = req.body._id;
-            if (req.body.codigo) { delete req.body.codigo }
             if (_id) {
                 Produto.findOne({_id: _id}).exec()
                 .then(
-                    function(produto){
-                        if (produto){
-                            for (var campo in req.body) {
-                                produto[campo] = req.body[campo];
-                            }
+                    function(produto) {
+                        if (produto) {
+                            produto.descricao = req.body.descricao;
+                            produto.qtde = req.body.qtde;
+                            produto.unidade = req.body.unidade;
+                            produto.estoqueMin = req.body.estoqueMin;
+                            produto.valor = req.body.valor;
                             produto.save(function(err){
                                 if (!err) {
                                     res.status(201).json({success: true});
