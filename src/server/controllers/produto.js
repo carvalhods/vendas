@@ -48,17 +48,10 @@ module.exports = function(app){
         },
 
         insertProduto: function(req, res){
-            var produto = {
-              descricao: req.body.descricao,
-              qtde: req.body.qtde,
-              unidade: req.body.unidade,
-              estoqueMin: req.body.estoqueMin,
-              valor: req.body.valor
-            }
-            Produto.create(produto)
+            Produto.create(req.body)
             .then(
                 function(produto){
-                    res.status(200).json(produto);
+                    res.status(201).json(produto);
                 },
                 function(erro){
                     res.status(500).json(erro);
