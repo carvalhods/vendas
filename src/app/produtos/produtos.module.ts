@@ -8,24 +8,20 @@ import { ProdutosService } from './produtos.service';
 import { ProdutosComponent } from './produtos.component';
 import { ProdutosGridComponent } from './produtos-grid/produtos-grid.component';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
-import { SmSelectComponent } from '../shared/sm-select/sm-select.component';
-import { InputMoneyComponent } from '../shared/input-money/input-money.component';
-import { DivMessageComponent } from '../shared/div-message/div-message.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ProdutosRoutingModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    SharedModule,
   ],
   declarations: [
     ProdutosComponent,
     ProdutosGridComponent,
     ProdutoDetalheComponent,
-    SmSelectComponent,
-    InputMoneyComponent,
-    DivMessageComponent,
   ],
   providers: [
     ProdutosService,
