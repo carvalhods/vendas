@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'produtos',
       loadChildren: 'app/produtos/produtos.module.ts#ProdutosModule',
+  },
+  {
+    path: 'vendas_lanc',
+      loadChildren: 'app/vendas-lancamento/vendas-lancamento.module.ts#VendasLancamentoModule',
   }
 ];
 
