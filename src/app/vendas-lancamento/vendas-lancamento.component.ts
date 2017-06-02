@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-vendas-lancamento',
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendasLancamentoComponent implements OnInit {
 
+  vendasLancForm: FormGroup;
   status: any = {saved: false, msg: null, erros: []};
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.vendasLancForm = this.formBuilder.group({
+      dataVenda: new Date().toISOString(),
+    });
   }
 
 }
