@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendasLancamentoComponent implements OnInit {
 
+  status: any = {saved: false, msg: null, erros: []};
+
   constructor() { }
 
   ngOnInit() {
