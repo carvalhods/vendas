@@ -18,6 +18,9 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() value: string;
   @Input() options: string[];
   @Input() id: string;
+  @Input() size: string;
+  @Input() search = false;
+  addClass: any = {};
   propagateChange = (_: any) => {};
 
   constructor(
@@ -39,9 +42,20 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
     script.text = `
       $(document).ready(function(){
         $("#${this.id}ChildDiv").dropdown('set selected', '${this.value}');
+        $('.ui.dropdown').dropdown({
+          onShow: function() {
+            $("#${this.id}ChildDiv").dropdown('set selected', '${this.value}');
+          }
+        });
       });
     `;
     this.renderer2.appendChild(document.body, script);
+
+    this.addClass = {
+      'mini': this.size == 'mini',
+      'small': this.size == 'small',
+      'search': this.search
+    };
   }
 
   writeValue(value: any) {

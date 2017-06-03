@@ -15,6 +15,16 @@ export class ProdutoDetalheComponent implements OnInit {
   private produtoForm: FormGroup;
   private status: any = {saved: false, msg: null, erros: []};
   private id: string;
+  private selectOptions = [
+      {id: 'UN', value: 'UN'},
+      {id: 'PÇ', value: 'PÇ'},
+      {id: 'CX', value: 'CX'},
+      {id: 'KG', value: 'KG'},
+      {id: 'M', value: 'M'},
+      {id: 'M²', value: 'M²'},
+      {id: 'M³', value: 'M³'},
+      {id: 'L', value: 'L'}
+  ];
 
   constructor(
     private produtosService: ProdutosService,

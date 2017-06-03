@@ -1,6 +1,11 @@
-<div class="ui selection search dropdown" [id]="id + 'ChildDiv'">
+<div class="ui selection dropdown"
+    [ngClass]="addClass"
+    [id]="id + 'ChildDiv'"
+    style="width:100%">
   <input type="hidden"
-    #inputHidden [name]="id + 'Child'" [value]="value" (change)="onChangeValue(inputHidden.value)"/>
+    [name]="id + 'Child'"
+    [value]="value"
+    (change)="onChangeValue($event.target.value)"/>
   <i class="dropdown icon"></i>
   <div class="default text"></div>
   <div class="menu">
