@@ -37,7 +37,16 @@
         <label for="unid">UNIDADE</label>
         <sm-select
           id="unid"
-          [options]="['UN','PÇ','CX','KG','M','M²','M³','L']"
+          [options]="[
+              {id: 'UN', value: 'UN'},
+              {id: 'PÇ', value: 'PÇ'},
+              {id: 'CX', value: 'CX'},
+              {id: 'KG', value: 'KG'},
+              {id: 'M', value: 'M'},
+              {id: 'M²', value: 'M²'},
+              {id: 'M³', value: 'M³'},
+              {id: 'L', value: 'L'}
+              ]"
           formControlName="unidade">
         </sm-select>
       </div>

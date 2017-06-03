@@ -4,8 +4,8 @@
   <i class="dropdown icon"></i>
   <div class="default text"></div>
   <div class="menu">
-    <div class="item" *ngFor="let option of options" [attr.data-value]="option">
-        {{ option }}
+    <div class="item" *ngFor="let option of options" [attr.data-value]="option.id">
+        {{ option.value }}
     </div>
   </div>
 </div>
