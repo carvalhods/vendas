@@ -1,0 +1,16 @@
+#tableItens {
+  height: 300px;
+  overflow: auto;
+}
+#tableItens table {
+  table-layout: fixed;
+}
+#tableItens td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#total {
+  float: right;
+  font-weight: bold;
+  font-size: 14pt;
+}

@@ -7,26 +7,75 @@
 
     <div class="fields">
       <div class="field">
-        <label>DATA</label>
         <sm-calendar id="dataVenda" formControlName="dataVenda"></sm-calendar>
       </div>
     </div>
 
-    <div class="fields">
-      <div class="eight wide field">
-        <label>PRODUTO</label>
-        <sm-select id="searchProduto" size="small" search="true"></sm-select>
-      </div>
-      <div class="two wide field">
-        <label>QTDE.</label>
-        <div class="ui small input">
-          <input type="number" min="0" max="" />
+    <div class="ui secondary segment">
+      <div class="fields">
+        <div class="eight wide field">
+          <label>PRODUTO</label>
+          <sm-select id="searchProduto" size="small" search="true"></sm-select>
+        </div>
+        <div class="two wide field">
+          <label>QTDE.</label>
+          <div class="ui small input">
+            <input type="number" min="0" max="" />
+          </div>
+        </div>
+        <div class="one wide field">
+          <label>UNID.</label>
+          <div class="ui small input">
+            <input type="text" readonly style="padding-left:0" />
+          </div>
+        </div>
+        <div class="three wide field">
+          <label>VALOR UNIT.</label>
+          <input-money id="valorUnit" size="small"></input-money>
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <button class="ui secondary button">
+            Adicionar
+          </button>
         </div>
       </div>
-      <div class="two wide field">
-        <label>VALOR UNIT.</label>
-        <input-money id="valorUnit" size="small"></input-money>
-      </div>
+    </div>
+
+    <div id="tableItens" class="ui secondary segment">
+      <table class="ui striped very compact table">
+        <thead>
+          <tr>
+            <th style="width:80px">CÓDIGO</th>
+            <th>DESCRIÇÃO</th>
+            <th style="width:100px">VALOR UNIT.</th>
+            <th style="width:100px">QTDE.</th>
+            <th style="width:110px">TOTAL</th>
+            <th style="width:50px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CÓDIGO</td>
+            <td>DESCRIÇÃO________________________________________</td>
+            <td>R$ 99.000,00</td>
+            <td>10000 UN</td>
+            <td>R$ 999.000,00</td>
+            <td>
+              <button class="ui icon mini negative button" title="Excluir">
+                <i class="remove icon"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <button class="ui teal button">Confirmar Venda</button>
+      <span id="total">
+        TOTAL:&nbsp;&nbsp;R$ 0,00
+      </span>
     </div>
 
   </form>
