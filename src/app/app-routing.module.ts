@@ -13,8 +13,8 @@ const routes: Routes = [
       loadChildren: 'app/produtos/produtos.module.ts#ProdutosModule',
   },
   {
-    path: 'vendas_lanc',
-      loadChildren: 'app/vendas-lancamento/vendas-lancamento.module.ts#VendasLancamentoModule',
+    path: 'vendas',
+      loadChildren: 'app/vendas/vendas.module.ts#VendasModule',
   }
 ];
 
