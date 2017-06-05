@@ -33,6 +33,14 @@ export class ProdutosService {
             .catch(this.handleError);
   }
 
+  searchProduto(keyword: string): Observable<Produto[]> {
+    const url = `${this.url}/search/${keyword}`;
+    return this.http
+              .get(url)
+              .map(res => res.json() as Produto[])
+              .catch(this.handleError);
+  }
+
   insertProduto(produto: Produto): Observable<Produto> {
     return this.http
             .post(this.url, JSON.stringify(produto), this.requestOptions)

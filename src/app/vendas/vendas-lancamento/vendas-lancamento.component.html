@@ -15,7 +15,8 @@
       <div class="fields">
         <div class="eight wide field">
           <label>PRODUTO</label>
-          <sm-select id="searchProduto" size="small" search="true"></sm-select>
+          <sm-select id="searchProduto" size="small" search="true">
+          </sm-select>
         </div>
         <div class="two wide field">
           <label>QTDE.</label>
@@ -35,7 +36,7 @@
         </div>
         <div class="field">
           <label>&nbsp;</label>
-          <button class="ui secondary button">
+          <button class="ui secondary button" (click)="addItem()">
             Adicionar
           </button>
         </div>
@@ -43,7 +44,7 @@
     </div>
 
     <div id="tableItens" class="ui secondary segment">
-      <table class="ui striped very compact table">
+      <table formArrayName="itens" class="ui striped very compact table">
         <thead>
           <tr>
             <th style="width:80px">CÓDIGO</th>
@@ -55,14 +56,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>CÓDIGO</td>
-            <td>DESCRIÇÃO________________________________________</td>
-            <td>R$ 99.000,00</td>
-            <td>10000 UN</td>
-            <td>R$ 999.000,00</td>
+          <tr *ngFor="let item of itens.controls; index as i"
+              [formGroupName]="i">
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.descricao }}</td>
+            <td>{{ item.valorUnit }}</td>
+            <td>{{ item.qtde + item.unidade }}</td>
+            <td>{{ item.valorUnit * item.qtde }}</td>
             <td>
-              <button class="ui icon mini negative button" title="Excluir">
+              <button class="ui icon mini negative button" title="Excluir"
+                      (click)="removeItem(i)">
                 <i class="remove icon"></i>
               </button>
             </td>

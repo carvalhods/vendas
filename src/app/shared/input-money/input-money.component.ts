@@ -8,7 +8,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <div class="ui input" [ngClass]="sizeClass">
       <input
         type="text" [id]="id + 'Child'" autocomplete="off"
-        (blur)="onChangeValue($event.target.value)"
+        (keyup)="onChangeValue($event.target.value)"        
       />
     </div>
   `,

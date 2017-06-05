@@ -21,6 +21,7 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() size: string;
   @Input() search = false;
   addClass: any = {};
+  loading = false;
   propagateChange = (_: any) => {};
 
   constructor(
@@ -31,30 +32,23 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
     const script = this.renderer2.createElement('script');
     script.text = `
       $(document).ready(function(){
-        $('.ui.dropdown').dropdown();
+        $('.ui.dropdown').dropdown({
+          showOnFocus: false,
+          message: {
+            noResults: ''
+          }
+        });
       });
     `;
     this.renderer2.appendChild(document.body, script);
   }
 
   ngOnChanges() {
-    const script = this.renderer2.createElement('script');
-    script.text = `
-      $(document).ready(function(){
-        $("#${this.id}ChildDiv").dropdown('set selected', '${this.value}');
-        $('.ui.dropdown').dropdown({
-          onShow: function() {
-            $("#${this.id}ChildDiv").dropdown('set selected', '${this.value}');
-          }
-        });
-      });
-    `;
-    this.renderer2.appendChild(document.body, script);
-
     this.addClass = {
       'mini': this.size == 'mini',
       'small': this.size == 'small',
-      'search': this.search
+      'search': this.search,
+      'loading': false
     };
   }
 
@@ -77,4 +71,7 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
     this.propagateChange(this.value);
   }
 
+  onInput() {
+    Object.assign(this.addClass, {'loading': (this.search) ? true : false});
+  }
 }

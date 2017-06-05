@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendasLancamentoComponent } from './vendas-lancamento/vendas-lancamento.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProdutosService } from '../produtos/produtos.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     VendasLancamentoComponent
+  ],
+  providers: [
+    ProdutosService,
   ]
 })
 export class VendasModule { }

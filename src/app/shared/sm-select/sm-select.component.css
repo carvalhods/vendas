@@ -1,0 +1,27 @@
+.ui.selection.dropdown {
+    width: 100%;
+    margin-top: 0.1em;
+    height: 2.3em;
+}
+
+.ui.selection.dropdown .menu {
+    width: 100%;
+    white-space: normal !important;
+}
+
+.ui.selection.dropdown .menu .item:first-child {
+    border-top: 1px solid #ddd !important;
+    min-height: 2.8em;
+}
+
+.ui.selection.dropdown .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+}
+
+.ui.selection.dropdown .icon {
+    text-align: right;
+    margin-left: 7px !important;
+}
