@@ -73,16 +73,17 @@ export class DivSearchProdutoComponent implements OnInit {
   }
 
   onChangeProduto(value) {
-    this.produtoSelected = this.produtosFound.find(
-      produto => produto.id === value
-    );
-    if (this.produtoSelected) {
-      this.produtoGroup.patchValue({
-        unidade: this.produtoSelected.unidade,
-        valorUnit: this.produtoSelected.valorUnit
-      });
+    if (this.produtosFound) {
+      this.produtoSelected = this.produtosFound.find(
+        produto => produto.id === value
+      );
+      if (this.produtoSelected) {
+        this.produtoGroup.patchValue({
+          unidade: this.produtoSelected.unidade,
+          valorUnit: this.produtoSelected.valorUnit
+        });
+      }
     }
-
   }
 
   add() {
@@ -109,6 +110,7 @@ export class DivSearchProdutoComponent implements OnInit {
     `;
     this.renderer2.appendChild(document.body, script);
     this.produtoSelected = null;
+    this.produtosFound = [];
   }
 
 }

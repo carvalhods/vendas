@@ -10,6 +10,7 @@ export class VendasLancamentoComponent implements OnInit {
 
   vendasLancForm: FormGroup;
   status: any = {saved: false, msg: null, erros: []};
+  valorTotal: number = 0;
 
   constructor(
     private formBuilder: FormBuilder
@@ -27,12 +28,21 @@ export class VendasLancamentoComponent implements OnInit {
   }
 
   onAddItem(event) {
-    console.log(event);
-    // this.itens.push(this.formBuilder.group(new Item()));
+    this.itens.push(this.formBuilder.group(event));
+    this.calcularValorTotal();
   }
 
   removeItem(index: number) {
     this.itens.removeAt(index);
+    this.calcularValorTotal();
+  }
+
+  calcularValorTotal() {
+    let soma: number = 0;
+    for (const item of this.itens.controls) {
+      soma += item.value.valorUnit * item.value.qtde;
+    }
+    this.valorTotal = soma;
   }
 
 }
