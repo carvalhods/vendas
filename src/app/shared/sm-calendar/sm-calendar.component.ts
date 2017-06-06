@@ -19,6 +19,7 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   @Input() id: string;
   @Input() type = 'date';
   @Input() today = true;
+  @Input() _tabindex = 100;
   text: any = {
    'days': ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
    'months': ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',

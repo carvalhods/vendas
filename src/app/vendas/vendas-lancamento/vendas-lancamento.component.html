@@ -7,41 +7,11 @@
 
     <div class="fields">
       <div class="field">
-        <sm-calendar id="dataVenda" formControlName="dataVenda"></sm-calendar>
+        <sm-calendar id="dataVenda" formControlName="dataVenda" _tabindex="1"></sm-calendar>
       </div>
     </div>
 
-    <div class="ui secondary segment">
-      <div class="fields">
-        <div class="eight wide field">
-          <label>PRODUTO</label>
-          <sm-select id="searchProduto" size="small" search="true">
-          </sm-select>
-        </div>
-        <div class="two wide field">
-          <label>QTDE.</label>
-          <div class="ui small input">
-            <input type="number" min="0" max="" />
-          </div>
-        </div>
-        <div class="one wide field">
-          <label>UNID.</label>
-          <div class="ui small input">
-            <input type="text" readonly style="padding-left:0" />
-          </div>
-        </div>
-        <div class="three wide field">
-          <label>VALOR UNIT.</label>
-          <input-money id="valorUnit" size="small"></input-money>
-        </div>
-        <div class="field">
-          <label>&nbsp;</label>
-          <button class="ui secondary button" (click)="addItem()">
-            Adicionar
-          </button>
-        </div>
-      </div>
-    </div>
+    <div-search-produto (addClicked)="onAddItem($event)"></div-search-produto>
 
     <div id="tableItens" class="ui secondary segment">
       <table formArrayName="itens" class="ui striped very compact table">

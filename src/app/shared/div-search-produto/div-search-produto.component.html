@@ -1,0 +1,37 @@
+<div class="ui secondary segment" [formGroup]="produtoGroup">
+  <div class="fields">
+    <div class="eight wide field">
+      <label>PRODUTO (Informe o código ou a descrição)</label>
+      <sm-select [id]="idSearchProduto" size="small" search="true" loading="true"
+                 _tabindex="2"
+                 formControlName="id"
+                 [options]="produtosFound"
+                 (keyup)="searchProduto($event)"
+                 (change)="onChangeProduto($event.target.value)">
+      </sm-select>
+    </div>
+    <div class="two wide field">
+      <label>QTDE.</label>
+      <div class="ui small input">
+        <input type="number" min="0" max="" name="qtde" tabindex="3" formControlName="qtde"/>
+      </div>
+    </div>
+    <div class="one wide field">
+      <label>UNID.</label>
+      <div class="ui small input">
+        <input type="text" readonly formControlName="unidade" style="padding-left:0" />
+      </div>
+    </div>
+    <div class="three wide field">
+      <label>VALOR UNIT.</label>
+      <input-money id="valorUnit" size="small" formControlName="valorUnit" _tabindex="4"></input-money>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="ui secondary small button" tabindex="5"
+              (click)="add()" [disabled]="produtoGroup.invalid">
+        Adicionar
+      </button>
+    </div>
+  </div>
+</div>

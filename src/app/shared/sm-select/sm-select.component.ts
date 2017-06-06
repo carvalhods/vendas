@@ -20,8 +20,9 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
   @Input() id: string;
   @Input() size: string;
   @Input() search = false;
+  @Input() loading = false;
+  @Input() _tabindex = 100;
   addClass: any = {};
-  loading = false;
   propagateChange = (_: any) => {};
 
   constructor(
@@ -29,6 +30,7 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
   ) { }
 
   ngOnInit() {
+    const searchClass = (this.search) ? '.search' : '';
     const script = this.renderer2.createElement('script');
     script.text = `
       $(document).ready(function(){
@@ -38,6 +40,16 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
             noResults: ''
           }
         });
+        $('#${this.id}ChildDiv ${searchClass}').attr('tabindex', ${this._tabindex});
+        $('.search').keypress(function(e) {
+          if (e.which == 13) {
+            $("[tabindex='${+this._tabindex + 1}']").focus();
+            e.preventDefault();
+          }
+        });
+        $('#${this.id}ChildDiv .menu').click(function(){
+          $("[tabindex='${+this._tabindex + 1}']").focus();
+        });
       });
     `;
     this.renderer2.appendChild(document.body, script);
@@ -45,8 +57,8 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
 
   ngOnChanges() {
     this.addClass = {
-      'mini': this.size == 'mini',
-      'small': this.size == 'small',
+      'mini': this.size === 'mini',
+      'small': this.size === 'small',
       'search': this.search,
       'loading': false
     };
@@ -72,6 +84,6 @@ export class SmSelectComponent implements OnInit, OnChanges, ControlValueAccesso
   }
 
   onInput() {
-    Object.assign(this.addClass, {'loading': (this.search) ? true : false});
+    Object.assign(this.addClass, {'loading': (this.loading) ? true : false});
   }
 }

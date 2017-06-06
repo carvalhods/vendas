@@ -7,8 +7,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   template: `
     <div class="ui input" [ngClass]="sizeClass">
       <input
-        type="text" [id]="id + 'Child'" autocomplete="off"
-        (keyup)="onChangeValue($event.target.value)"        
+        type="text" [id]="id + 'Child'" autocomplete="off" [tabindex]="_tabindex"
+        (keyup)="onChangeValue($event.target.value)"
       />
     </div>
   `,
@@ -27,6 +27,7 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
   @Input() value: number;
   @Input() id: string;
   @Input() size: string;
+  @Input() _tabindex = 100;
   sizeClass: any = {};
   valueChild: number;
   propagateChange = (_: any) => {};
@@ -64,8 +65,8 @@ export class InputMoneyComponent implements OnInit, OnChanges, ControlValueAcces
     this.renderer2.appendChild(document.body, script);
 
     this.sizeClass = {
-      'mini': this.size == 'mini',
-      'small': this.size == 'small'
+      'mini': this.size === 'mini',
+      'small': this.size === 'small'
     };
   }
 
