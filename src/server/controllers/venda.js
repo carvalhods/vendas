@@ -8,11 +8,11 @@ module.exports = function(app) {
           {dataVenda: {$gte: req.query.dataInicio}},
           {dataVenda: {$lte: req.query.dataFim}}
         ]})
-        .populate('itens.produto')
+        .populate('itens.produto', 'codigo descricao unidade')
         .exec()
         .then(
-          function(produtos) {
-            res.status(200).json(produtos);
+          function(vendas) {
+            res.status(200).json(vendas);
           },
           function(err) {
             res.status(500).json(err)
