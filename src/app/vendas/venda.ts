@@ -6,7 +6,7 @@ export class Venda {
 }
 
 export class Item {
-  _id: any;
+  produto: any;
   codigo: number;
   descricao: string;
   qtde: number;

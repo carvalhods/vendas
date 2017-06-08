@@ -3,7 +3,8 @@
 
   <div-message [status]="status"></div-message>
 
-  <form [formGroup]="vendasLancForm" class="ui form">
+  <form class="ui form" [formGroup]="vendasLancForm"
+        (ngSubmit)="onSubmit()" (change)="onChange()">
 
     <div class="fields">
       <div class="field">
@@ -45,7 +46,10 @@
     </div>
 
     <div>
-      <button class="ui teal button">Confirmar Venda</button>
+      <button class="ui teal button" type="submit"
+              [disabled]="itens.length == 0">
+        Confirmar Venda
+      </button>
       <span id="total">
         TOTAL:&nbsp;&nbsp; R$ {{ valorTotal | number:'1.2-2' }}
       </span>

@@ -17,6 +17,9 @@ export class DivMessageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    if (!this.status.saved && this.status.erros.length > 0) {
+      this.status.erros = this.status.erros[0].split('\n');
+    }
     if (this.status.saved === true) {
       const script = this.renderer2.createElement('script');
       script.text = `
