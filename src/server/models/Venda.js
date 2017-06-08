@@ -55,7 +55,7 @@ module.exports = function(app){
                   _item => JSON.stringify(_item.produto) == JSON.stringify(produtos[i]._id)
                 );
                 if (produtos[i].qtde < item.qtde) {
-                  result.push("- " + produtos[i].descricao +
+                  result.push(produtos[i].descricao +
                               " (Qtde.: " + produtos[i].qtde +
                               " " + produtos[i].unidade + " disponíveis)");
                 }

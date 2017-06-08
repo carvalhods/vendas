@@ -21,7 +21,7 @@
       <div class="fourteen wide field">
         <label for="descricao">DESCRIÇÃO DO PRODUTO</label>
         <input type="text" id="descricao" formControlName="descricao"
-                maxlength="100" autocomplete="off" />
+                maxlength="100" tabindex="1" autocomplete="off" />
       </div>
 
     </div>
@@ -30,33 +30,34 @@
 
       <div class="two wide field">
         <label for="qtde">QTDE.</label>
-        <input type="number" id="qtde" formControlName="qtde" min="0" max="" />
+        <input type="number" id="qtde" formControlName="qtde" min="0" max="" tabindex="2"/>
       </div>
 
       <div class="field">
         <label for="unid">UNIDADE</label>
         <sm-select
-          id="unid"
-          [options]="['UN','PÇ','CX','KG','M','M²','M³','L']"
-          formControlName="unidade">
+          id="unid" [options]="selectOptions" formControlName="unidade" _tabindex="3">
         </sm-select>
       </div>
 
       <div class="three wide field">
         <label for="estoqueMin">ESTOQUE MÍNIMO</label>
-        <input type="number" id="estoqueMin" formControlName="estoqueMin" min="0" max="" />
+        <input type="number" id="estoqueMin" formControlName="estoqueMin" min="0" max="" tabindex="4"/>
       </div>
 
       <div class="field">
         <label for="valorUnit">VALOR UNITÁRIO</label>
-        <input-money id="valorUnit" formControlName="valor" ngDefaultControl></input-money>
+        <input-money id="valorUnit" formControlName="valor" _tabindex="5"></input-money>
       </div>
 
     </div>
 
   </form>
 
-  <button class="ui teal button" (click)="onSubmit()" [disabled]="produtoForm.pristine">Salvar</button>
-  <a routerLink="/produtos" class="ui grey button">Voltar</a>
+  <button class="ui teal button" (click)="onSubmit()"
+          [disabled]="produtoForm.pristine" tabindex="6">
+      Salvar
+  </button>
+  <a routerLink="/produtos" class="ui grey button" tabindex="7">Voltar</a>
 
 </div>

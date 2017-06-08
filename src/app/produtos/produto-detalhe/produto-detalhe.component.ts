@@ -15,6 +15,16 @@ export class ProdutoDetalheComponent implements OnInit {
   private produtoForm: FormGroup;
   private status: any = {saved: false, msg: null, erros: []};
   private id: string;
+  private selectOptions = [
+      {id: 'UN', value: 'UN'},
+      {id: 'PÇ', value: 'PÇ'},
+      {id: 'CX', value: 'CX'},
+      {id: 'KG', value: 'KG'},
+      {id: 'M', value: 'M'},
+      {id: 'M²', value: 'M²'},
+      {id: 'M³', value: 'M³'},
+      {id: 'L', value: 'L'}
+  ];
 
   constructor(
     private produtosService: ProdutosService,
@@ -50,19 +60,17 @@ export class ProdutoDetalheComponent implements OnInit {
   getProduto() {
     this.produtosService.getProduto(this.id).subscribe(
       produto => {
-        this.produtoForm.get('_id').setValue(produto._id);
-        this.produtoForm.get('codigo').setValue(produto.codigo);
-        this.produtoForm.get('unidade').setValue(produto.unidade);
-        this.produtoForm.get('valor').setValue(0);
+        this.produtoForm.patchValue({
+          _id: produto._id,
+          codigo: produto.codigo,
+          unidade: produto.unidade,
+          valor: produto.valor || 0,
+        });
         if (this.id !== 'novo') {
-          this.produtoForm.setValue({
-            _id: produto._id,
-            codigo: produto.codigo,
-            descricao: produto.descricao,
-            qtde: produto.qtde,
-            unidade: produto.unidade,
-            estoqueMin: produto.estoqueMin,
-            valor: produto.valor
+          this.produtoForm.patchValue({
+              descricao: produto.descricao,
+              qtde: produto.qtde,
+              estoqueMin: produto.estoqueMin
           });
         }
       },

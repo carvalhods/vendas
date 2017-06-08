@@ -1,0 +1,59 @@
+<div>
+  <h2 class="ui dividing header">Lançamento de Venda</h2>
+
+  <div-message [status]="status"></div-message>
+
+  <form class="ui form" [formGroup]="vendasLancForm"
+        (ngSubmit)="onSubmit()" (change)="onChange()">
+
+    <div class="fields">
+      <div class="field">
+        <sm-calendar id="dataVenda" formControlName="dataVenda" _tabindex="1"></sm-calendar>
+      </div>
+    </div>
+
+    <div-search-produto (addClicked)="onAddItem($event)"></div-search-produto>
+
+    <div id="tableItens" class="ui secondary segment">
+      <table formArrayName="itens" class="ui striped very compact table">
+        <thead>
+          <tr>
+            <th style="width:50px"></th>
+            <th style="width:80px">CÓDIGO</th>
+            <th>DESCRIÇÃO</th>
+            <th style="width:100px">VALOR UNIT.</th>
+            <th style="width:100px; text-align:center">QTDE.</th>
+            <th style="width:110px; text-align:center">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itens.controls; index as i"
+              [formGroupName]="i">
+            <td>
+              <button class="ui icon mini negative button" title="Excluir"
+                      (click)="removeItem(i)">
+                <i class="remove icon"></i>
+              </button>
+            </td>
+            <td>{{ item.value.codigo }}</td>
+            <td>{{ item.value.descricao }}</td>
+            <td style="text-align:right">R$ {{ item.value.valorUnit | number:'1.2-2' }}</td>
+            <td style="text-align:center">{{ item.value.qtde | number }} {{ item.value.unidade }}</td>
+            <td style="text-align:right">R$ {{ item.value.valorUnit * item.value.qtde | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <button class="ui teal button" type="submit"
+              [disabled]="itens.length == 0">
+        Confirmar Venda
+      </button>
+      <span id="total">
+        TOTAL:&nbsp;&nbsp; R$ {{ valorTotal | number:'1.2-2' }}
+      </span>
+    </div>
+
+  </form>
+</div>

@@ -26,7 +26,6 @@ module.exports = function(app) {
     registraVenda: function(req, res) {
       var venda = req.body;
       if (venda.itens) {
-        venda.itens = JSON.parse(venda.itens);
         if (venda.numero) { delete venda.numero }
         Venda.create(venda)
         .then(
