@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendasLancamentoComponent } from './vendas-lancamento/vendas-lancamento.component';
+import { VendasHistoricoComponent } from './vendas-historico/vendas-historico.component';
 import { SharedModule } from '../shared/shared.module';
 import { VendasService } from '../vendas/vendas.service';
 import { ProdutosService } from '../produtos/produtos.service';
@@ -16,7 +17,8 @@ import { ProdutosService } from '../produtos/produtos.service';
     SharedModule
   ],
   declarations: [
-    VendasLancamentoComponent
+    VendasLancamentoComponent,
+    VendasHistoricoComponent
   ],
   providers: [
     VendasService,
