@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Renderer2, forwardRef } from '@angular/core';
+import { Component, OnInit,
+         Input, Renderer2, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -20,6 +21,8 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   @Input() type = 'date';
   @Input() today = true;
   @Input() _tabindex = 100;
+  @Input() hours: number;
+  @Input() minutes: number;
   text: any = {
    'days': ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
    'months': ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -81,13 +84,25 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
     const script = this.renderer2.createElement('script');
     script.text = `
       var dateChanged = $('#${this.id}Child').calendar('get date');
-       if (dateChanged) {
-        dateChanged = dateChanged.toISOString();
-       }
     `;
     this.renderer2.appendChild(document.body, script);
-    this.value = window['dateChanged'];
+
+    const date = this.adjustDate(window['dateChanged']);
+    this.value = (date) ? date.toISOString() : null;
     this.propagateChange(this.value);
+  }
+
+  adjustDate(date) {
+    if (date) {
+      if (this.hours !== undefined) {
+        date.setHours(this.hours);
+      }
+      if (this.minutes !== undefined) {
+        date.setMinutes(this.minutes);
+        if (this.minutes == 59) { date.setSeconds(59); }
+      }
+    }
+    return date;
   }
 
   writeValue(value: any) {

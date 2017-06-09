@@ -7,17 +7,21 @@
     <div class="ui grid">
       <div class="four wide column">
         <label>Data Inicial</label>
-        <sm-calendar id="dataInicio" _tabindex="1" [(ngModel)]="dataInicio">
+        <sm-calendar id="dataInicio" hours="0" minutes="0"
+            [(ngModel)]="dataInicio" _tabindex="1">
         </sm-calendar>
       </div>
       <div class="four wide column">
         <label>Data Final</label>
-        <sm-calendar id="dataFim" [(ngModel)]="dataFim" _tabindex="2"></sm-calendar>
+        <sm-calendar id="dataFim" hours="23" minutes="59"
+            [(ngModel)]="dataFim" _tabindex="2">
+        </sm-calendar>
       </div>
       <div class="one column">
         <label></label>
         <button class="ui secondary button" tabindex="3"
-                (click)="onBuscar(dataInicio)"
+                [class.loading]="loading"
+                (click)="onBuscar()"
                 [disabled]="!dataInicio || !dataFim">
           Buscar
         </button>
@@ -27,8 +31,8 @@
 
   <div class="ui secondary segment">
     <div style="width:100%">
-      <ag-grid-angular #agGrid style="width:100%; height:400px;" class="ag-fresh"
-                        [gridOptions]="gridOptions">
+      <ag-grid-angular style="width:100%; height:400px;" class="ag-fresh"
+                       #agGrid [gridOptions]="gridOptions">
       </ag-grid-angular>
     </div>
   </div>
