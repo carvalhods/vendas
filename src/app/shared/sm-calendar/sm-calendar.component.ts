@@ -40,6 +40,7 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     const script = this.renderer2.createElement('script');
     script.text = `
+      var teclou = false;
       $(document).ready(function() {
         $('#${this.id}Child').calendar({
           type: '${this.type}',
@@ -50,7 +51,26 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
               if (!date) return '';
               return date.toLocaleDateString('pt-BR');
             }
-          }
+          },
+          onChange: function (date, text, mode) {
+            if (!date) return '';
+            if (teclou) {
+              var dia = date.getDate();
+              var mes = date.getMonth();
+              if (dia <= 12) {
+                date.setDate(mes + 1);
+                date.setMonth(dia - 1);
+              }
+              teclou = false;
+              return date;
+            }
+          },
+        });
+        $('#${this.id}Child').keyup(function(){
+          teclou = true;
+        });
+        $('#${this.id}Child input').blur(function(){
+          teclou = false;
         });
       });
     `;
@@ -60,7 +80,10 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   onDateChange() {
     const script = this.renderer2.createElement('script');
     script.text = `
-      var dateChanged = $('#${this.id}Child').calendar('get date').toISOString();
+      var dateChanged = $('#${this.id}Child').calendar('get date');
+       if (dateChanged) {
+        dateChanged = dateChanged.toISOString();
+       }
     `;
     this.renderer2.appendChild(document.body, script);
     this.value = window['dateChanged'];
@@ -68,7 +91,7 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any) {
-    if (value !== undefined) {
+    if (value) {
       this.value = value;
       const script = this.renderer2.createElement('script');
       script.text = `

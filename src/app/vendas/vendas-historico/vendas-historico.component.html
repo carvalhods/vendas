@@ -2,4 +2,28 @@
   <h2 class="ui dividing header">Histórico de Vendas</h2>
 
   <div-message [status]="status"></div-message>
+
+  <div class="ui secondary segment">
+    <div class="ui grid">
+      <div class="four wide column">
+        <label>Data Inicial</label>
+        <sm-calendar id="dataInicio" _tabindex="1"
+                      [(ngModel)]="dataInicio">
+        </sm-calendar>
+      </div>
+      <div class="four wide column">
+        <label>Data Final</label>
+        <sm-calendar id="dataFim" [(ngModel)]="dataFim" _tabindex="2"></sm-calendar>
+      </div>
+      <div class="one column">
+        <label></label>
+        <button class="ui secondary button" tabindex="3"
+                (click)="onBuscar(dataInicio)"
+                [disabled]="!dataInicio || !dataFim">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>

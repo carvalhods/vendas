@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendasLancamentoComponent } from './vendas-lancamento/vendas-lancamento.component';
@@ -12,6 +12,7 @@ import { ProdutosService } from '../produtos/produtos.service';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     VendasRoutingModule,
     SharedModule
