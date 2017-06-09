@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular/main';
 
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendasLancamentoComponent } from './vendas-lancamento/vendas-lancamento.component';
@@ -15,7 +16,8 @@ import { ProdutosService } from '../produtos/produtos.service';
     FormsModule,
     ReactiveFormsModule,
     VendasRoutingModule,
-    SharedModule
+    SharedModule,
+    AgGridModule.withComponents([])
   ],
   declarations: [
     VendasLancamentoComponent,
