@@ -1,3 +1,5 @@
+import { Produto } from '../produtos/produto';
+
 export class Venda {
   _id: any;
   numero: number;
@@ -6,10 +8,8 @@ export class Venda {
 }
 
 export class Item {
-  produto: any;
-  codigo: number;
-  descricao: string;
+  _id: any;
+  produto: Produto;
   qtde: number;
-  unidade: string;
   valorUnit: number;
 }

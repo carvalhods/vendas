@@ -7,22 +7,22 @@
     <div class="ui grid">
       <div class="four wide column">
         <label>Data Inicial</label>
-        <sm-calendar id="dataInicio" hours="0" minutes="0"
-            [(ngModel)]="dataInicio" _tabindex="1">
+        <sm-calendar id="dataInicio" hours="0" minutes="0" _tabindex="1"
+            [(ngModel)]="dataInicio" (change)="onChange($event)">
         </sm-calendar>
       </div>
       <div class="four wide column">
         <label>Data Final</label>
-        <sm-calendar id="dataFim" hours="23" minutes="59"
-            [(ngModel)]="dataFim" _tabindex="2">
+        <sm-calendar id="dataFim" hours="23" minutes="59" _tabindex="2"
+            [(ngModel)]="dataFim" (changeValue)="onChange($event)">
         </sm-calendar>
       </div>
       <div class="one column">
-        <label></label>
+        <label>&nbsp;</label>
         <button class="ui secondary button" tabindex="3"
                 [class.loading]="loading"
-                (click)="onBuscar()"
-                [disabled]="!dataInicio || !dataFim">
+                [disabled]="!dataInicio || !dataFim"
+                (click)="onBuscar()">
           Buscar
         </button>
       </div>

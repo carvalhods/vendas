@@ -1,5 +1,5 @@
-import { Component, OnInit,
-         Input, Renderer2, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output,
+          EventEmitter, Renderer2, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -23,6 +23,7 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   @Input() _tabindex = 100;
   @Input() hours: number;
   @Input() minutes: number;
+  @Output() changeValue = new EventEmitter();
   text: any = {
    'days': ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
    'months': ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -44,7 +45,19 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
     const script = this.renderer2.createElement('script');
     script.text = `
       var teclou = false;
+      var dateChanged${this.id};
       $(document).ready(function() {
+        function triggerEvent() {
+          if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            document.getElementById('${this.id}Input').dispatchEvent(evt);
+          }
+          else {
+            document.getElementById('${this.id}Input').fireEvent("onchange");
+          }
+        }
+
         $('#${this.id}Child').calendar({
           type: '${this.type}',
           text: ${JSON.stringify(this.text)},
@@ -56,7 +69,11 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
             }
           },
           onChange: function (date, text, mode) {
-            if (!date) return '';
+            if (!date) {
+              dateChanged${this.id} = null;
+              triggerEvent();
+              return '';
+            }
             if (teclou) {
               var dia = date.getDate();
               var mes = date.getMonth();
@@ -65,8 +82,10 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
                 date.setMonth(dia - 1);
               }
               teclou = false;
-              return date;
             }
+            dateChanged${this.id} = date;
+            triggerEvent();
+            return date;
           },
         });
         $('#${this.id}Child').keyup(function(){
@@ -81,15 +100,10 @@ export class SmCalendarComponent implements OnInit, ControlValueAccessor {
   }
 
   onDateChange() {
-    const script = this.renderer2.createElement('script');
-    script.text = `
-      var dateChanged = $('#${this.id}Child').calendar('get date');
-    `;
-    this.renderer2.appendChild(document.body, script);
-
-    const date = this.adjustDate(window['dateChanged']);
+    const date = this.adjustDate(window[`dateChanged${this.id}`]);
     this.value = (date) ? date.toISOString() : null;
     this.propagateChange(this.value);
+    this.changeValue.emit(this.value);
   }
 
   adjustDate(date) {

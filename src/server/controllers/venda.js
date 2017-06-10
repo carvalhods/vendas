@@ -8,7 +8,7 @@ module.exports = function(app) {
           {dataVenda: {$gte: req.query.dataInicio}},
           {dataVenda: {$lte: req.query.dataFim}}
         ]})
-        .sort({numero: 1})
+        .sort({dataVenda: 1, numero: 1})
         .populate('itens.produto', 'codigo descricao unidade')
         .exec()
         .then(
