@@ -59,8 +59,8 @@ export class VendasHistoricoComponent implements OnInit {
 
   onBuscar() {
     if (this.dataInicio && this.dataFim) {
-      const dataFim = (typeof this.dataFim === 'string') ? this.dataFim : this.dataFim.toISOString();
       this.loading = true;
+      const dataFim = (typeof this.dataFim === 'string') ? this.dataFim : this.dataFim.toISOString();
       this.vendasService.listaVendas(this.dataInicio, dataFim).subscribe(
         vendas => {
           this.vendas = vendas;
@@ -80,10 +80,11 @@ export class VendasHistoricoComponent implements OnInit {
     if (this.vendas) {
       const rows = [];
       for (const venda of this.vendas) {
-        const row = { dataVenda: null, itens: [] };
+        const row = { dataVenda: null, itens: [], valorTotal: 0 };
         Object.assign(row, venda);
         row.dataVenda = new Date(venda.dataVenda).toLocaleDateString('pt-BR');
         row.itens = [];
+        let soma = 0;
         for (const item of venda.itens) {
           row.itens.push({
             produto: item.produto.codigo + ' - ' + item.produto.descricao,
@@ -91,7 +92,9 @@ export class VendasHistoricoComponent implements OnInit {
             valorUnit: item.valorUnit,
             valorTotal: item.qtde * item.valorUnit
           });
+          soma += (item.qtde * item.valorUnit);
         }
+        row.valorTotal = soma;
         rows.push(row);
       }
       this.gridOptions.api.setRowData(rows);
@@ -112,6 +115,9 @@ export class VendasHistoricoComponent implements OnInit {
   }
 
   valueCellStyle(params) {
+    if ((!params.data.produto) && params.column.colId == 'valorTotal') {
+      return {'font-weight': 'bold', 'text-align': 'right'};
+    }
     switch (params.column.colId) {
       case 'dataVenda':
       case 'codigo':
