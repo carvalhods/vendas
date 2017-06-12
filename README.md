@@ -28,3 +28,6 @@ Acesso pelo browser: http://\<endereço-IP-do-host\>:3000
 ## Funcionalidades futuras
 - Autenticação de usuários
 - Backup e restauração de dados
+
+## Feedback
+https://github.com/carvalhods/vendas/issues
