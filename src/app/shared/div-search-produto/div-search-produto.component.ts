@@ -53,7 +53,6 @@ export class DivSearchProdutoComponent implements OnInit {
   fillProdutoSelector() {
     this.searchTermStream
       .debounceTime(600)
-      .distinctUntilChanged()
       .switchMap((term: string) => this.produtosService.searchProduto(term))
       .subscribe((result) => {
         this.produtosFound = [];

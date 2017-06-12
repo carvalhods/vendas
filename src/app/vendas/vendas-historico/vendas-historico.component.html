@@ -1,0 +1,40 @@
+<div>
+  <h2 class="ui dividing header">Histórico de Vendas</h2>
+
+  <div-message [status]="status"></div-message>
+
+  <div class="ui secondary segment">
+    <div class="ui grid">
+      <div class="four wide column">
+        <label>Data Inicial</label>
+        <sm-calendar id="dataInicio" hours="0" minutes="0" _tabindex="1"
+            [(ngModel)]="dataInicio" (changeValue)="onChange($event)">
+        </sm-calendar>
+      </div>
+      <div class="four wide column">
+        <label>Data Final</label>
+        <sm-calendar id="dataFim" hours="23" minutes="59" _tabindex="2"
+            [(ngModel)]="dataFim" (changeValue)="onChange($event)">
+        </sm-calendar>
+      </div>
+      <div class="one column">
+        <label>&nbsp;</label>
+        <button class="ui secondary button" tabindex="3"
+                [class.loading]="loading"
+                [disabled]="!dataInicio || !dataFim"
+                (click)="onBuscar()">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui secondary segment">
+    <div style="width:100%">
+      <ag-grid-angular style="width:100%; height:400px;" class="ag-fresh"
+                       #agGrid [gridOptions]="gridOptions">
+      </ag-grid-angular>
+    </div>
+  </div>
+
+</div>

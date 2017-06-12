@@ -10,20 +10,28 @@ import { HandleError } from '../helpers/handleError';
 @Injectable()
 export class VendasService {
 
-  url = 'http://localhost:3000/vendas';
-  headers = new Headers({'Content-Type': 'application/json'});
-  reqOptions = new RequestOptions({headers: this.headers});
-  HandleError = new HandleError().handle;
+  private url = 'http://localhost:3000/vendas';
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private reqOptions = new RequestOptions({headers: this.headers});
+  private handleError = new HandleError().handle;
 
   constructor(
     private http: Http
   ) { }
 
+  listaVendas(dataInicio: string, dataFim: string): Observable<Venda[]> {
+    const _url = `${this.url}?dataInicio=${dataInicio}&dataFim=${dataFim}`;
+    return this.http
+            .get(_url)
+            .map(res => res.json() as Venda[])
+            .catch(this.handleError);
+  }
+
   registraVenda(venda: Venda): Observable<Venda> {
     return this.http
             .post(this.url, JSON.stringify(venda), this.reqOptions)
             .map(res => res.json() as Venda)
-            .catch(this.HandleError);
+            .catch(this.handleError);
   }
 
 }
