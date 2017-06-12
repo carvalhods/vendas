@@ -1,0 +1,45 @@
+<div>
+
+  <h2 class="ui dividing header">Cadastro de Produtos</h2>
+
+  <div-message [status]="status"></div-message>
+
+  <div class="ui warning message" [hidden]="!btnExcluirPressed" [class.icon]="loading">
+    <div class="content">
+      <div class="ui header">
+        Deseja realmente excluir este produto? Esta operação não poderá ser desfeita
+      </div>
+      <ul class="list">
+        <li>{{ activeItem?.codigo }} - {{ activeItem?.descricao }}</li>
+      </ul>
+      <button class="ui teal button" (click)="btnExcluirPressed = false">Não</button>
+      <button class="ui grey button" (click)="onExcluirConfirm()">Sim</button>
+    </div>
+    <i class="notched icon" [ngClass]="{'circle': loading, 'loading': loading}"></i>
+  </div>
+
+  <app-produtos-grid
+    [produtos]="produtos"
+    (rowSelected)="onRowSelected($event)" >
+  </app-produtos-grid>
+
+  <br />
+  <a class="ui secondary button" [routerLink]="['/produtos', 'novo']">
+    <i class="plus icon"></i>
+    Novo Produto
+  </a>
+
+  <a class="ui secondary button"
+    [class.disabled]="btnDisabled"
+    [routerLink]="(activeItem) ? activeItem._id : 0" >
+      <i class="edit icon"></i>
+      Alterar Produto
+  </a>
+
+  <button class="ui negative button" style="float:right"
+          [class.disabled]="btnDisabled" (click)="onExcluir()" >
+    <i class="trash icon"></i>
+    Excluir Produto
+  </button>
+
+</div>

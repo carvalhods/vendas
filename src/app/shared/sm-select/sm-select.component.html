@@ -1,0 +1,17 @@
+<div class="ui selection dropdown"
+    [ngClass]="addClass"
+    [id]="id + 'ChildDiv'"
+    style="width:100%"
+    (input)="onInput()">
+  <input type="hidden"
+    [name]="id + 'Child'"
+    [value]="value"
+    (change)="onChangeValue($event.target.value)"/>
+  <i class="dropdown icon"></i>
+  <div class="default text"></div>
+  <div class="menu">
+    <div class="item" *ngFor="let option of options" [attr.data-value]="option.id">
+        {{ option.value }}
+    </div>
+  </div>
+</div>

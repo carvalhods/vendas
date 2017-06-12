@@ -1,0 +1,10 @@
+<div class="ui message"
+    [hidden]="!status.erros.length"
+    [hidden]="!status.saved"
+    [ngClass]="{'success': status.saved, 'error': status.erros.length > 0}">
+  <div class="ui header">{{ status.msg }}</div>
+  <ul class="list" [hidden]="status.erros.length == 0">
+    <li *ngFor="let erro of status.erros">{{ erro }}</li>
+  </ul>
+</div>
+<br />
