@@ -10,7 +10,7 @@ import { HandleError } from '../helpers/handleError';
 @Injectable()
 export class ProdutosService {
 
-  private url = 'http://localhost:3000/produtos';
+  private url = '/produtos';
   private headers = new Headers({'Content-Type': 'application/json'});
   private requestOptions = new RequestOptions({headers: this.headers});
   private handleError = new HandleError().handle;

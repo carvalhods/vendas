@@ -38,6 +38,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   onExcluir() {
+    this.status = {saved: false, msg: null, erros: []};
     if (this.activeItem) {
       this.btnExcluirPressed = true;
     }
@@ -55,6 +56,7 @@ export class ProdutosComponent implements OnInit {
             },
       error => {
               this.status = Object.assign(error, {msg: 'Não foi possível excluir o produto'});
+              this.loading = false;
               this.btnExcluirPressed = false;
             }
     );
