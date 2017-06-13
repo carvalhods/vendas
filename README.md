@@ -8,12 +8,13 @@ Controle de Vendas Simples em MEAN Stack
 Testado nos navegadores Google Chrome 59 e Mozilla Firefox 52
 
 ## Instalação
-git clone https://github.com/carvalhods/vendas.git<br>
-cd vendas<br>
-npm install<br>
+<pre>
+git clone https://github.com/carvalhods/vendas.git
+cd vendas
+npm install</pre>
 
 ## Executar a aplicação
-npm start<br><br>
+<pre>npm start</pre>
 Acesso pelo browser: http://\<endereço-IP-do-host\>:3000
 
 ## Screenshots
