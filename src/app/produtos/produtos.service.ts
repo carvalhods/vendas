@@ -19,9 +19,10 @@ export class ProdutosService {
     private http: Http,
   ) { }
 
-  listaProdutos(): Observable<Produto[]> {
+  listaProdutos(keyword: string = null): Observable<Produto[]> {
+    const url = (keyword) ? `${this.url}/?q=${keyword}` : this.url;
     return this.http
-            .get(this.url)
+            .get(url)
             .map(res => res.json() as Produto[])
             .catch(this.handleError);
   }
@@ -31,14 +32,6 @@ export class ProdutosService {
             .get(`${this.url}/${id}`)
             .map(res => res.json() as Produto)
             .catch(this.handleError);
-  }
-
-  searchProduto(keyword: string): Observable<Produto[]> {
-    const url = `${this.url}/search/${keyword}`;
-    return this.http
-              .get(url)
-              .map(res => res.json() as Produto[])
-              .catch(this.handleError);
   }
 
   insertProduto(produto: Produto): Observable<Produto> {
