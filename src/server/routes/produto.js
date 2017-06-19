@@ -9,7 +9,5 @@ module.exports = function(app) {
   app.route('/produtos/:id')
     .get(controller.getProduto)
     .delete(controller.deleteProduto);
-
-  app.route('/produtos/search/:keyword')
-    .get(controller.searchProduto);
+    
 }

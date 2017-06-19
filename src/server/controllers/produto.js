@@ -3,7 +3,17 @@ module.exports = function(app) {
 
   var controller = {
     listaProdutos: function(req, res) {
-      Produto.find()
+      var criteria = null;
+      if (req.query.q) {
+        var keyword = req.query.q;
+        var pattern = new RegExp(keyword, 'i');
+        var patternInt = (!Number.isNaN(parseInt(keyword))) ? parseInt(keyword) : 0;
+        criteria = {$or: [
+          {codigo: patternInt},
+          {descricao: pattern}
+        ]}
+      }
+      Produto.find(criteria)
       .sort({codigo: 1})
       .exec()
       .then(
@@ -16,7 +26,7 @@ module.exports = function(app) {
       )
     },
 
-    getProduto: function(req, res){
+    getProduto: function(req, res) {
       var _id = req.params.id;
       if (_id) {
         if (_id == 'novo') {
@@ -45,26 +55,6 @@ module.exports = function(app) {
           )
         }
       }
-    },
-
-    searchProduto: function(req, res) {
-      var keyword = req.params.keyword;
-      var pattern = new RegExp(keyword, 'i');
-      var patternInt = (!Number.isNaN(parseInt(keyword))) ? parseInt(keyword) : 0;
-      Produto.find({$or: [
-        {codigo: patternInt},
-        {descricao: pattern}
-      ]})
-        .sort({descricao: 1})
-        .exec()
-        .then(
-          function(produtos) {
-            res.status(200).json(produtos);
-          },
-          function(err) {
-            res.status(500).json(err);
-          }
-        )
     },
 
     insertProduto: function(req, res) {
@@ -120,7 +110,7 @@ module.exports = function(app) {
                 if (err) {
                   res.status(500).json(err.message);
                 } else {
-                  res.status(204).send({success: true});
+                  res.status(200).send({success: true});
                 }
               }
             )
